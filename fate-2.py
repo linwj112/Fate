@@ -271,6 +271,14 @@ def star_explain(star_name):    #簡易星曜說明
         text.insert(END,star_name +"\n")
         text.insert(END,"這是用Python3.10所寫成的排盤程式。\n")
         text.insert(END,"視窗部分採用Tkinter模組。\n")
+    elif star_name == '地劫':
+        text.insert(END,star_name +"\n")
+        text.insert(END,"這是用Python3.10所寫成的排盤程式。\n")
+        text.insert(END,"視窗部分採用Tkinter模組。\n")
+    elif star_name == '地空':
+        text.insert(END,star_name +"\n")
+        text.insert(END,"這是用Python3.10所寫成的排盤程式。\n")
+        text.insert(END,"視窗部分採用Tkinter模組。\n")
 
     elif star_name == '四化星說明':
         text.insert(END,"所謂四化，是紫微斗數中的主星，會依照時空環境不同而產生出四種不同的變化。\n")
@@ -498,9 +506,11 @@ def line34(drawtray,location_kk):
     return
 
 def fateplat_new(fate_data):    #命盤排列
+    p_status = 0
     #ftype_place = fate_data[4]
     fpbg ='#F0F0F0'#'lightgreen''#F0F0F0'
     #ftype_star_14 = fate_data[6]
+
     root = Tk()
     screenwidth = root.winfo_screenwidth()
     screenheight = root.winfo_screenheight()
@@ -527,10 +537,10 @@ def fateplat_new(fate_data):    #命盤排列
     filemenu = Menu(menubar,tearoff=False, font=('Keiu', 14 ))
     menubar.add_cascade(label="檔案",menu=filemenu)
     #File功能表內建立功能表清單
-    filemenu.add_command(label="開啟舊檔")#,command=openfile
+    filemenu.add_command(label="開啟舊檔",command=root.destroy)#,command=openfile
     filemenu.add_command(label="儲存圖片",command=lambda:save_img(fate_data[16]))#lambda:save_img(fate_data[16])
     filemenu.add_separator()
-    filemenu.add_command(label="離開程式",command=root.destroy)
+    filemenu.add_command(label="離開程式",command=quit)
 
     #建立功能表類別物件，和將此功能表類別命名宮位說明
     plate_place = Menu(menubar, font=('Keiu', 14 ))
@@ -574,11 +584,18 @@ def fateplat_new(fate_data):    #命盤排列
     star_14.add_command(label="天梁星",command=lambda:star_explain('天梁星'))#
     star_14.add_command(label="七殺星",command=lambda:star_explain('七殺星'))#
     star_14.add_command(label="破軍星",command=lambda:star_explain('破軍星'))#
-    star_14.add_separator()
-    star_14.add_command(label="陀羅",command=lambda:star_explain('陀羅'))#
-    star_14.add_command(label="擎羊",command=lambda:star_explain('擎羊'))#
-    star_14.add_command(label="火星",command=lambda:star_explain('火星'))#
-    star_14.add_command(label="鈴星",command=lambda:star_explain('鈴星'))#
+
+    #建立功能表類別物件，和將此功能表類別命名星曜說明
+    star_flytk = Menu(menubar, font=('Keiu', 14 ))
+    menubar.add_cascade(label="煞星空亡說明",menu=star_flytk)
+
+    star_flytk.add_command(label="陀羅",command=lambda:star_explain('陀羅'))#
+    star_flytk.add_command(label="擎羊",command=lambda:star_explain('擎羊'))#
+    star_flytk.add_command(label="火星",command=lambda:star_explain('火星'))#
+    star_flytk.add_command(label="鈴星",command=lambda:star_explain('鈴星'))#
+    star_flytk.add_separator()
+    star_flytk.add_command(label="地劫",command=lambda:star_explain('地劫'))#
+    star_flytk.add_command(label="地空",command=lambda:star_explain('地空'))#
 
     #建立功能表類別物件，和將此功能表類別命名星曜說明
     star_4fly = Menu(menubar, font=('Keiu', 14 ))
@@ -645,32 +662,32 @@ def fateplat_new(fate_data):    #命盤排列
     fm1 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm1.grid(row=3,column=2)#子
     #print(type(fm1))
-    tk.Label(fm1, text=fate_data[2][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=0)  #紫微星系  
-    tk.Label(fm1, text=fate_data[2][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=0) #紫微星系四化
-    tk.Label(fm1, text=fate_data[3][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=25) #天府星系
-    tk.Label(fm1, text=fate_data[3][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=25)    #天府星系四化
-    tk.Label(fm1, text=fate_data[12][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=50)    #文昌星
-    tk.Label(fm1, text=fate_data[12][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=50)   #文昌星四化
-    tk.Label(fm1, text=fate_data[13][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=75)    #文曲星
-    tk.Label(fm1, text=fate_data[13][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=75)   #文曲星四化
-    tk.Label(fm1, text=fate_data[9][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=100)    #左輔星
-    tk.Label(fm1, text=fate_data[9][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=100)   #左輔星四化
-    tk.Label(fm1, text=fate_data[10][0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=125)   #右弼星
-    tk.Label(fm1, text=fate_data[10][0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=125)   #右弼星四化
+    tk.Label(fm1, text=fate_data[2][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=0)  #紫微星系  
+    tk.Label(fm1, text=fate_data[2][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=0) #紫微星系四化
+    tk.Label(fm1, text=fate_data[3][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=25) #天府星系
+    tk.Label(fm1, text=fate_data[3][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=25)    #天府星系四化
+    tk.Label(fm1, text=fate_data[12][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=50)    #文昌星
+    tk.Label(fm1, text=fate_data[12][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=50)   #文昌星四化
+    tk.Label(fm1, text=fate_data[13][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=75)    #文曲星
+    tk.Label(fm1, text=fate_data[13][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=75)   #文曲星四化
+    tk.Label(fm1, text=fate_data[9][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=100)    #左輔星
+    tk.Label(fm1, text=fate_data[9][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=100)   #左輔星四化
+    tk.Label(fm1, text=fate_data[10][0][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=0,y=125)   #右弼星
+    tk.Label(fm1, text=fate_data[10][0][1],font=fontStyle, width=4, height=1, bg = fpbg).place(x=50,y=125)   #右弼星四化
 
-    tk.Label(fm1, text=fate_data[19][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=30)    #地劫
-    tk.Label(fm1, text=fate_data[20][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #地空
-    tk.Label(fm1, text=fate_data[21][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm1, text=fate_data[19][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=0)    #地劫
+    tk.Label(fm1, text=fate_data[20][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=25)    #地空
+    tk.Label(fm1, text=fate_data[21][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm1, text=fate_data[23][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm1, text=fate_data[24][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm1, text=fate_data[25][0],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm1, text=fate_data[23][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm1, text=fate_data[24][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=150,y=50)    #三台
+    tk.Label(fm1, text=fate_data[25][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=50)    #八座
 
-    tk.Label(fm1, text=fate_data[11][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=200,y=0)  #火星、鈴星
-    tk.Label(fm1, text=fate_data[15][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=200,y=30) #天魁、天鉞
-    tk.Label(fm1, text=fate_data[14][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=250,y=0) #陀羅、祿存、擎羊
+    tk.Label(fm1, text=fate_data[11][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=0)  #火星、鈴星
+    tk.Label(fm1, text=fate_data[15][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=30) #天魁、天鉞
+    tk.Label(fm1, text=fate_data[14][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=250,y=0) #陀羅、祿存、擎羊
 
-    fm1_sm_li = tk.Label(fm1, text=fate_data[8][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=200,y=90)    #小限流年
+    fm1_sm_li = tk.Label(fm1, text=fate_data[8][0],font=fontStyle, width=4, height=1).place(x=200,y=90)    #小限流年
     fm1_bm_li = tk.Label(fm1, text=fate_data[7][5][0], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
     fm1_local_t = tk.Label(fm1, text=fate_data[17][0], width=4, height=1,bg='yellow').place(x=250,y=105)    #命盤宮位天干--寅首
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #命盤宮位地支--固定
@@ -690,7 +707,7 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm2, text=fate_data[2][1][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
     tk.Label(fm2, text=fate_data[2][1][1],font=fontStyle, width=4, height=1).place(x=50,y=0)
     tk.Label(fm2, text=fate_data[3][1][0],font=fontStyle, width=4, height=1).place(x=0,y=25)
-    tk.Label(fm2, text=fate_data[3][1][1],font=fontStyle, width=4, height=1,).place(x=50,y=25)
+    tk.Label(fm2, text=fate_data[3][1][1],font=fontStyle, width=4, height=1).place(x=50,y=25)
     tk.Label(fm2, text=fate_data[12][1][0],font=fontStyle, width=4, height=1).place(x=0,y=50)
     tk.Label(fm2, text=fate_data[12][1][1],font=fontStyle, width=4, height=1).place(x=50,y=50)
     tk.Label(fm2, text=fate_data[13][1][0],font=fontStyle, width=4, height=1).place(x=0,y=75)
@@ -700,16 +717,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm2, text=fate_data[10][1][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm2, text=fate_data[10][1][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm2, text=fate_data[19][1],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm2, text=fate_data[20][1],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm2, text=fate_data[21][1],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm2, text=fate_data[19][1],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm2, text=fate_data[20][1],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm2, text=fate_data[21][1],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm2, text=fate_data[23][1],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm2, text=fate_data[24][1],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm2, text=fate_data[25][1],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm2, text=fate_data[23][1],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm2, text=fate_data[24][1],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm2, text=fate_data[25][1],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm2, text=fate_data[11][1],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm2, text=fate_data[15][1],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm2, text=fate_data[15][1],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm2, text=fate_data[14][1],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm2_sm_li = tk.Label(fm2, text=fate_data[8][1],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -734,16 +751,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm3, text=fate_data[10][2][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm3, text=fate_data[10][2][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm3, text=fate_data[19][2],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm3, text=fate_data[20][2],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm3, text=fate_data[21][2],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm3, text=fate_data[19][2],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm3, text=fate_data[20][2],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm3, text=fate_data[21][2],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm3, text=fate_data[23][2],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm3, text=fate_data[24][2],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm3, text=fate_data[25][2],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm3, text=fate_data[23][2],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm3, text=fate_data[24][2],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm3, text=fate_data[25][2],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm3, text=fate_data[11][2],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm3, text=fate_data[15][2],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm3, text=fate_data[15][2],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm3, text=fate_data[14][2],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm3_sm_li = tk.Label(fm3, text=fate_data[8][2],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -768,16 +785,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm4, text=fate_data[10][3][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm4, text=fate_data[10][3][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm4, text=fate_data[19][3],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm4, text=fate_data[20][3],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm4, text=fate_data[21][3],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm4, text=fate_data[19][3],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm4, text=fate_data[20][3],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm4, text=fate_data[21][3],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm4, text=fate_data[23][3],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm4, text=fate_data[24][3],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm4, text=fate_data[25][3],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm4, text=fate_data[23][3],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm4, text=fate_data[24][3],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm4, text=fate_data[25][3],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm4, text=fate_data[11][3],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm4, text=fate_data[15][3],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm4, text=fate_data[15][3],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm4, text=fate_data[14][3],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm4_sm_li = tk.Label(fm4, text=fate_data[8][3],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -802,16 +819,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm5, text=fate_data[10][4][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm5, text=fate_data[10][4][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm5, text=fate_data[19][4],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm5, text=fate_data[20][4],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm5, text=fate_data[21][4],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm5, text=fate_data[19][4],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm5, text=fate_data[20][4],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm5, text=fate_data[21][4],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm5, text=fate_data[23][4],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm5, text=fate_data[24][4],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm5, text=fate_data[25][4],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm5, text=fate_data[23][4],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm5, text=fate_data[24][4],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm5, text=fate_data[25][4],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm5, text=fate_data[11][4],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm5, text=fate_data[15][4],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm5, text=fate_data[15][4],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm5, text=fate_data[14][4],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm5_sm_li = tk.Label(fm5, text=fate_data[8][4],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -836,16 +853,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm6, text=fate_data[10][5][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm6, text=fate_data[10][5][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm6, text=fate_data[19][5],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm6, text=fate_data[20][5],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm6, text=fate_data[21][5],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm6, text=fate_data[19][5],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm6, text=fate_data[20][5],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm6, text=fate_data[21][5],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm6, text=fate_data[23][5],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm6, text=fate_data[24][5],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm6, text=fate_data[25][5],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm6, text=fate_data[23][5],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm6, text=fate_data[24][5],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm6, text=fate_data[25][5],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm6, text=fate_data[11][5],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm6, text=fate_data[15][5],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm6, text=fate_data[15][5],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm6, text=fate_data[14][5],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm6_sm_li = tk.Label(fm6, text=fate_data[8][5],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -870,16 +887,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm7, text=fate_data[10][6][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm7, text=fate_data[10][6][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm7, text=fate_data[19][6],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm7, text=fate_data[20][6],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm7, text=fate_data[21][6],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm7, text=fate_data[19][6],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm7, text=fate_data[20][6],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm7, text=fate_data[21][6],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm7, text=fate_data[23][6],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm7, text=fate_data[24][6],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm7, text=fate_data[25][6],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm7, text=fate_data[23][6],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm7, text=fate_data[24][6],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm7, text=fate_data[25][6],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm7, text=fate_data[11][6],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm7, text=fate_data[15][6],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm7, text=fate_data[15][6],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm7, text=fate_data[14][6],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm7_sm_li = tk.Label(fm7, text=fate_data[8][6],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -904,16 +921,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm8, text=fate_data[10][7][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm8, text=fate_data[10][7][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm8, text=fate_data[19][7],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm8, text=fate_data[20][7],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm8, text=fate_data[21][7],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm8, text=fate_data[19][7],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm8, text=fate_data[20][7],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm8, text=fate_data[21][7],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm8, text=fate_data[23][7],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm8, text=fate_data[24][7],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm8, text=fate_data[25][7],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm8, text=fate_data[23][7],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm8, text=fate_data[24][7],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm8, text=fate_data[25][7],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm8, text=fate_data[11][7],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm8, text=fate_data[15][7],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm8, text=fate_data[15][7],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm8, text=fate_data[14][7],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm8_sm_li = tk.Label(fm8, text=fate_data[8][7],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -938,16 +955,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm9, text=fate_data[10][8][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm9, text=fate_data[10][8][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm9, text=fate_data[19][8],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm9, text=fate_data[20][8],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm9, text=fate_data[21][8],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm9, text=fate_data[19][8],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm9, text=fate_data[20][8],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm9, text=fate_data[21][8],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm9, text=fate_data[23][8],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm9, text=fate_data[24][8],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm9, text=fate_data[25][8],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm9, text=fate_data[23][8],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm9, text=fate_data[24][8],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm9, text=fate_data[25][8],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm9, text=fate_data[11][8],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm9, text=fate_data[15][8],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm9, text=fate_data[15][8],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm9, text=fate_data[14][8],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm9_sm_li = tk.Label(fm9, text=fate_data[8][8],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -972,16 +989,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm10, text=fate_data[10][9][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm10, text=fate_data[10][9][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm10, text=fate_data[19][9],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm10, text=fate_data[20][9],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm10, text=fate_data[21][9],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm10, text=fate_data[19][9],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm10, text=fate_data[20][9],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm10, text=fate_data[21][9],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm10, text=fate_data[23][9],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm10, text=fate_data[24][9],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm10, text=fate_data[25][9],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm10, text=fate_data[23][9],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm10, text=fate_data[24][9],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm10, text=fate_data[25][9],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm10, text=fate_data[11][9],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm10, text=fate_data[15][9],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm10, text=fate_data[15][9],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm10, text=fate_data[14][9],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm10_sm_li = tk.Label(fm10, text=fate_data[8][9],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -1006,16 +1023,16 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm11, text=fate_data[10][10][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm11, text=fate_data[10][10][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm11, text=fate_data[19][10],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm11, text=fate_data[20][10],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm11, text=fate_data[21][10],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm11, text=fate_data[19][10],font=fontStyle, width=4, height=1).place(x=100,y=0)   #地劫
+    tk.Label(fm11, text=fate_data[20][10],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm11, text=fate_data[21][10],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
-    tk.Label(fm11, text=fate_data[23][10],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm11, text=fate_data[24][10],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm11, text=fate_data[25][10],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm11, text=fate_data[23][10],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm11, text=fate_data[24][10],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm11, text=fate_data[25][10],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     tk.Label(fm11, text=fate_data[11][10],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm11, text=fate_data[15][10],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm11, text=fate_data[15][10],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm11, text=fate_data[14][10],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
     fm11_sm_li = tk.Label(fm11, text=fate_data[8][10],font=fontStyle, width=4, height=1).place(x=200,y=90)
@@ -1040,17 +1057,17 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(fm12, text=fate_data[10][11][0],font=fontStyle, width=4, height=1).place(x=0,y=125)
     tk.Label(fm12, text=fate_data[10][11][1],font=fontStyle, width=4, height=1).place(x=50,y=125)
 
-    tk.Label(fm12, text=fate_data[19][11],font=fontStyle, width=4, height=1).place(x=100,y=30)    #地劫
-    tk.Label(fm12, text=fate_data[20][11],font=fontStyle, width=4, height=1).place(x=100,y=60)    #地空
-    tk.Label(fm12, text=fate_data[21][11],font=fontStyle, width=4, height=1).place(x=250,y=30)    #紅鸞、天喜
+    tk.Label(fm12, text=fate_data[19][11],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
+    tk.Label(fm12, text=fate_data[20][11],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
+    tk.Label(fm12, text=fate_data[21][11],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
 
     tk.Label(fm12, text=fate_data[11][11],font=fontStyle, width=4, height=1).place(x=200,y=0)
-    tk.Label(fm12, text=fate_data[15][11],font=fontStyle, width=4, height=1).place(x=200,y=30)
+    tk.Label(fm12, text=fate_data[15][11],font=fontStyle, width=4, height=1).place(x=200,y=25)
     tk.Label(fm12, text=fate_data[14][11],font=fontStyle, width=4, height=1).place(x=250,y=0)
 
-    tk.Label(fm12, text=fate_data[23][11],font=fontStyle, width=4, height=1,bg=fpbg).place(x=100,y=60)    #天刑、天馬
-    tk.Label(fm12, text=fate_data[24][11],font=fontStyle, width=4, height=1,bg=fpbg).place(x=150,y=60)    #三台
-    tk.Label(fm12, text=fate_data[25][11],font=fontStyle, width=4, height=1,bg=fpbg).place(x=200,y=60)    #八座
+    tk.Label(fm12, text=fate_data[23][11],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
+    tk.Label(fm12, text=fate_data[24][11],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
+    tk.Label(fm12, text=fate_data[25][11],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
 
     fm12_sm_li = tk.Label(fm12, text=fate_data[8][11],font=fontStyle, width=4, height=1).place(x=200,y=90)
     fm12_bm_li = tk.Label(fm12, text=fate_data[7][5][11], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
@@ -1060,8 +1077,8 @@ def fateplat_new(fate_data):    #命盤排列
     fm12_name = tk.Button(fm12, font=fontStyle, text=fate_data[1][11], width=6, height=1, command=lambda:show_result(fm12_result)).place(x=120,y=120)
     #'''
     root.mainloop()
-    
-    return(1)
+    p_status = 1
+    return(p_status)
 
 def keyin_data(sbase_data): #輸入基本資料生辰八字
 
@@ -1244,7 +1261,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     data_save(save_data)
     root_input.destroy()
 
-    return i_base_data
+    return(i_base_data)
 
 #*-----大小限及太歲的火鈴羊陀及祿權科忌運算及排盤----*
 
@@ -2391,7 +2408,7 @@ def main_module(b_d):   #產生排盤資料
            temp_date_1=((i-1+int(f_date))%12)
         if month_start_2[i][0] == '右弼':
             temp_date_2=(i-(int(f_date))%12)+1
-            print(temp_date_2)
+            #print(temp_date_2)
 
     for j in range(0,12):
         if j == temp_date_1:
@@ -2654,8 +2671,8 @@ def health():   #十二宮代表的身體部位
     #*********************** 十二宮繪製布局 ****************************
     fm1 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
     fm1.grid(row=3,column=2)#子
-    tk.Label(fm1, text=health[0][0],font=fontStyle, width=4, height=1, bg=fpbg).place(x=0,y=0)  #紫微星系  
-    tk.Label(fm1, text=health[0][1],font=fontStyle, width=4, height=1, bg=fpbg).place(x=50,y=0) #紫微星系四化
+    tk.Label(fm1, text=health[0][0],font=fontStyle, width=4, height=1).place(x=0,y=0)  #紫微星系  
+    tk.Label(fm1, text=health[0][1],font=fontStyle, width=4, height=1).place(x=50,y=0) #紫微星系四化
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #命盤宮位地支--固定
     fm1_name = tk.Button(fm1, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)   #命盤宮位名稱
 
@@ -2747,9 +2764,10 @@ if __name__ == '__main__':
     while run_fate <= 2:
         b_d=keyin_data(sbase_data)      #輸入命主的基本資料
         fate_data = main_module(b_d)    #產生排盤所需資料
-        fateplat_new(fate_data)         #將資料傳入排盤程式_new
+        trew=fateplat_new(fate_data)    #將資料傳入排盤程式_new
+        #print(trew)
         run_fate = quit_prg()           #是否離開程式
-    print("end_program")
+
 
 
 
