@@ -12,8 +12,127 @@ import copy
 import sxtwl
 import pyscreenshot as ImageGrab
 from tkinter import messagebox
-def show_result(result_data):   #顯示宮位主星說明
-    print(result_data)
+def show_result(result_data,f_number):   #顯示宮位主星說明
+    #*-----傳入排盤程式的變數內容-----*
+    #xx  #基本資料 -->0
+    #    xx[0][0] = f_year_a #本生年天干
+    #    xx[0][1] = f_year_b #本生年地支
+    #    xx[1]   = # 生月-日
+    #    xx[2]   = # 生日干支
+    #    xx[3]   = # 生時
+    #plate_place = 定十二宮 -->1
+    #star_a_6 = 紫微星系 -->2
+    #star_a_8 = 天府星系 -->3
+    #ftype_place_m   = #命宮所在為置,起大限用 -->4
+    #ftype_place_s   = #身宮所在為置 -->5
+    #ftype_star_14   #紫微星起始位置 -->6
+    #big_limit[0]   #大限流年起始數 -->7[0]
+    #big_limit[1]   #男女性別 -->7[1]
+    #big_limit[2]   #本生年天干陰陽 -->7[2]
+    #big_limit[3]    #命宮起始位置 -->7[3]
+    #big_limit[4]    #五行局 -->7[4]
+    #big_limit[5]    #大限流年 -->7[5]
+
+    #small_limit    #小限流年 -->8
+    #month_start_1   #左輔 -->9
+    #month_start_2   #右弼 -->10
+    #time_start    #火星,鈴星 -->11
+    #time_start_1    #文昌 -->12
+    #time_start_2    #文曲 -->13
+    #lu_yan_tuo  #祿存、擎羊、陀羅 -->14
+    #kwe_yuei    #天魁、天鉞 -->15
+    #name_label  #姓名 -->16
+    #eing_so #寅首-->個宮位的天干 -->17
+    #temp_zz #身宮 -->18
+    #di_jey  #地劫 -->19
+    #di_kwng #地空 -->20
+    #lwang_si    #紅鸞、天喜 -->21
+    #fdata  #出生年月日時分秒資料 -->22
+    #month_start_3  #天刑、天馬 -->23
+    #date_start_1   #三台 -->24
+    #date_start_2   #八座 -->25
+    explain_star={'紫微':"紫微星要說明",
+                  '天機':"天機星要說明",
+                  '太陽':"太陽星要說明",
+                  '武曲':"武曲星要說明",
+                  '天同':"天同星要說明",
+                  '廉貞':"廉貞星要說明",
+                  '天府':"天府星要說明",
+                  '太陰':"太陰星要說明",
+                  '貪狼':"貪狼星要說明",
+                  '巨門':"巨門星要說明",
+                  '天相':"天相星要說明",
+                  '天梁':"天梁星要說明",
+                  '七殺':"七殺星要說明",
+                  '破軍':"破軍星要說明",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+
+    #print(result_data[1][f_number])
+    show_item=[2,3,9,10,11,12,13,14,15,19,20,21,23,24,25]
+    show_contant = []
+
+    root_show_result = Tk()
+    screenwidth = root_show_result.winfo_screenwidth()
+    screenheight = root_show_result.winfo_screenheight()
+    w_win = 800
+    h_win = 300
+    x_offset = (screenwidth - w_win) / 2
+    y_offset = ((screenheight - h_win) / 2)
+    root_show_result.title(result_data[1][f_number])
+    root_show_result.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
+
+    style = Style()
+    style.theme_use("alt")
+    fontStyle = tkFont.Font(family="標楷體", size=20)#Keiu 16    
+    for i in show_item:
+        if result_data[i][f_number] != '' :
+            show_temp = result_data[i][f_number]
+            if (show_temp != '' ) and (show_temp != ['', ''] ):
+                show_contant.append(show_temp)
+    m=0
+    for k in (show_contant):
+
+        if type(k) == type(show_item):
+            tk.Label(root_show_result,font=fontStyle, text=k[0],width = 8).place(x=0,y=m*30)
+            tk.Label(root_show_result,font=fontStyle, text=explain_star[k[0]],width = 20).place(x=100,y=m*30)
+            #print(explain_star[k[0]])
+        else:
+            tk.Label(root_show_result,font=fontStyle, text=k,width = 8).place(x=0,y=m*30)
+            tk.Label(root_show_result,font=fontStyle, text=explain_star[k],width = 20).place(x=100,y=m*30)
+            #print(explain_star[k])
+        m+=1            
+
+    if show_contant == []:
+        tk.Label(root_show_result,font=fontStyle, text=k,width = 8).place(x=0,y=m*30)
+        tk.Label(root_show_result,font=fontStyle, text=explain_star[k],width = 20).place(x=100,y=m*30)
+        print(result_data[1][f_number],"無主星") 
+        m+=1
+    root_show_result.mainloop()
+
+
+
     return 0
 
 def fate_palace(palace_name):   #說明十二宮的特質及用法
@@ -105,6 +224,13 @@ def fate_palace(palace_name):   #說明十二宮的特質及用法
         text.insert(END,palace_name +"\n")
         text.insert(END,"身宮的意義，說的是他所重疊的宮位就是這個人一生追求的價值所在，\n")
         text.insert(END,"而追求的方式則依照身宮內的星曜來解釋。\n")
+        text.insert(END,"身宮不是單獨成一宮位，而是依據生時和命宮(子，午)、夫妻宮(丑、未)、財帛宮(寅，申)、遷移宮(卯，酉)、官祿宮(辰，戌)、福德宮(巳，亥)等宮位同在一宮。\n")
+        text.insert(END,"身宮與命宮同宮：代表個人自我主觀強烈，不易受外在環境影響，也比較不容易改命。\n")
+        text.insert(END,"身宮與夫妻宮同宮：代表個人受婚姻以及配偶的影響很大，具有家庭責任心，重視家庭生活氣氛。\n")
+        text.insert(END,"身宮與財帛宮同宮：代表個人易受經濟狀況左右行為，偏重金錢價值觀，行事多以賺錢為目標。\n")
+        text.insert(END,"身宮與遷移宮同宮：代表個人易受環境變遷的影響，經常要外出奔波，且比較會有職業或居住上的變動。\n")
+        text.insert(END,"身宮與官祿宮同宮：代表個人易受職業與工作環境影響，事業心重，行事多以追求事業成就或權力名位為目標。\n")
+        text.insert(END,"身宮與與福德宮同宮：代表個人易受祖德、精神層面的影響，比較會享福、享受生活，注重生活品質，缺乏積極進取。\n")
     elif palace_name == '本命命盤':
         text.insert(END,palace_name +"\n")
         text.insert(END,"是以我們的出生年月日時排出命盤，一出生就定下來，不會再改變。\n")
@@ -309,7 +435,7 @@ def star_explain(star_name):    #簡易星曜說明
         text.insert(END,"忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。\n")
         text.insert(END,"因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，\n")
         text.insert(END,"因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，\n")
-        text.insert(END,"在那個部分有空缺，而難以理性地做出好的判斷與決定。，\n")
+        text.insert(END,"在那個部分有空缺，而難以理性地做出好的判斷與決定。\n")
         text.insert(END,"\n")
         text.insert(END,"命宮\n")
         text.insert(END,"覺得自己本身有空缺，所以這樣的人會努力去填補這空缺。\n")
@@ -507,9 +633,8 @@ def line34(drawtray,location_kk):
 
 def fateplat_new(fate_data):    #命盤排列
     p_status = 0
-    #ftype_place = fate_data[4]
+
     fpbg ='#F0F0F0'#'lightgreen''#F0F0F0'
-    #ftype_star_14 = fate_data[6]
 
     root = Tk()
     screenwidth = root.winfo_screenwidth()
@@ -691,16 +816,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm1_bm_li = tk.Label(fm1, text=fate_data[7][5][0], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
     fm1_local_t = tk.Label(fm1, text=fate_data[17][0], width=4, height=1,bg='yellow').place(x=250,y=105)    #命盤宮位天干--寅首
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #命盤宮位地支--固定
-    #傳送至解釋宮位程式的資料 1:宮位 2:紫微星系 3:天府星系 9:左輔 10:右弼 
-    #                       11:火星，鈴星 14:祿存、陀羅、擎羊 15:天魁、天鉞
-    #                       12:文昌 13:文曲
-    #                       19:地劫 20:天空 21:紅鸞、天喜
-    fm1_result=[fate_data[1][0],fate_data[2][0],fate_data[3][0],
-                fate_data[9][0],fate_data[10][0],
-                fate_data[11][0],fate_data[14][0],fate_data[15][0],
-                fate_data[12][0],fate_data[13][0],
-                fate_data[19][0],fate_data[20][0],fate_data[21][0]]    #宮位程式的資料
-    fm1_name = tk.Button(fm1, font=fontStyle, text=fate_data[1][0], width=6, height=1, command=lambda:show_result(fm1_result)).place(x=120,y=120)   #命盤宮位名稱
+    fm1_name = tk.Button(fm1, font=fontStyle, text=fate_data[1][0], width=6, height=1, command=lambda:show_result(fate_data,0)).place(x=120,y=120)   #命盤宮位名稱
 
     fm2 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm2.grid(row=3,column=1)#丑
@@ -734,7 +850,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm2_local_t = tk.Label(fm2, text=fate_data[17][1], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm2_local = tk.Label(fm2, text='丑', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm2_result=[fate_data[1][1],fate_data[2][1],fate_data[3][1]]
-    fm2_name = tk.Button(fm2, font=fontStyle, text=fate_data[1][1], width=6, height=1, command=lambda:show_result(fm2_result)).place(x=120,y=120)
+    fm2_name = tk.Button(fm2, font=fontStyle, text=fate_data[1][1], width=6, height=1, command=lambda:show_result(fate_data,1)).place(x=120,y=120)
 
     fm3 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm3.grid(row=3,column=0)#寅
@@ -768,7 +884,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm3_local_t = tk.Label(fm3, text=fate_data[17][2], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm3_local = tk.Label(fm3, text='寅', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm3_result=[fate_data[1][2],fate_data[2][2],fate_data[3][2]]
-    fm3_name = tk.Button(fm3, font=fontStyle, text=fate_data[1][2], width=6, height=1, command=lambda:show_result(fm3_result)).place(x=120,y=120)
+    fm3_name = tk.Button(fm3, font=fontStyle, text=fate_data[1][2], width=6, height=1, command=lambda:show_result(fate_data,2)).place(x=120,y=120)
 
     fm4 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm4.grid(row=2,column=0)#卯
@@ -802,7 +918,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm4_local_t = tk.Label(fm4, text=fate_data[17][3], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm4_local = tk.Label(fm4, text='卯', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm4_result=[fate_data[1][3],fate_data[2][3],fate_data[3][3]]
-    fm4_name = tk.Button(fm4, font=fontStyle, text=fate_data[1][3], width=6, height=1, command=lambda:show_result(fm4_result)).place(x=120,y=120)
+    fm4_name = tk.Button(fm4, font=fontStyle, text=fate_data[1][3], width=6, height=1, command=lambda:show_result(fate_data,3)).place(x=120,y=120)
 
     fm5 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm5.grid(row=1,column=0)#辰
@@ -836,7 +952,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm5_local_t = tk.Label(fm5, text=fate_data[17][4], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm5_local = tk.Label(fm5, text='辰', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm5_result=[fate_data[1][4],fate_data[2][4],fate_data[3][4]]
-    fm5_name = tk.Button(fm5, font=fontStyle, text=fate_data[1][4], width=6, height=1, command=lambda:show_result(fm5_result)).place(x=120,y=120)
+    fm5_name = tk.Button(fm5, font=fontStyle, text=fate_data[1][4], width=6, height=1, command=lambda:show_result(fate_data,4)).place(x=120,y=120)
 
     fm6 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm6.grid(row=0,column=0)#巳
@@ -870,7 +986,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm6_local_t = tk.Label(fm6, text=fate_data[17][5], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm6_local = tk.Label(fm6, text='巳', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm6_result=[fate_data[1][5],fate_data[2][5],fate_data[3][5]]
-    fm6_name = tk.Button(fm6, font=fontStyle, text=fate_data[1][5], width=6, height=1, command=lambda:show_result(fm6_result)).place(x=120,y=120)
+    fm6_name = tk.Button(fm6, font=fontStyle, text=fate_data[1][5], width=6, height=1, command=lambda:show_result(fate_data,5)).place(x=120,y=120)
 
     fm7 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm7.grid(row=0,column=1)#午
@@ -904,7 +1020,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm7_local_t = tk.Label(fm7, text=fate_data[17][6], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm7_local = tk.Label(fm7, text='午', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm7_result=[fate_data[1][6],fate_data[2][6],fate_data[3][6]]
-    fm7_name = tk.Button(fm7, font=fontStyle, text=fate_data[1][6], width=6, height=1, command=lambda:show_result(fm7_result)).place(x=120,y=120)
+    fm7_name = tk.Button(fm7, font=fontStyle, text=fate_data[1][6], width=6, height=1, command=lambda:show_result(fate_data,6)).place(x=120,y=120)
 
     fm8 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm8.grid(row=0,column=2)#未
@@ -938,7 +1054,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm8_local_t = tk.Label(fm8, text=fate_data[17][7], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm8_local = tk.Label(fm8, text='未', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm8_result=[fate_data[1][7],fate_data[2][7],fate_data[3][7]]
-    fm8_name = tk.Button(fm8, font=fontStyle, text=fate_data[1][7], width=6, height=1, command=lambda:show_result(fm8_result)).place(x=120,y=120)
+    fm8_name = tk.Button(fm8, font=fontStyle, text=fate_data[1][7], width=6, height=1, command=lambda:show_result(fate_data,7)).place(x=120,y=120)
 
     fm9 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm9.grid(row=0,column=3)#申
@@ -972,7 +1088,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm9_local_t = tk.Label(fm9, text=fate_data[17][8], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm9_local = tk.Label(fm9, text='申', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm9_result=[fate_data[1][8],fate_data[2][8],fate_data[3][8]]
-    fm9_name = tk.Button(fm9, font=fontStyle, text=fate_data[1][8], width=6, height=1, command=lambda:show_result(fm9_result)).place(x=120,y=120)
+    fm9_name = tk.Button(fm9, font=fontStyle, text=fate_data[1][8], width=6, height=1, command=lambda:show_result(fate_data,8)).place(x=120,y=120)
 
     fm10 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm10.grid(row=1,column=3)#酉
@@ -1006,7 +1122,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm10_local_t = tk.Label(fm10, text=fate_data[17][9], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm10_local = tk.Label(fm10, text='酉', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm10_result=[fate_data[1][9],fate_data[2][9],fate_data[3][9]]
-    fm10_name = tk.Button(fm10, font=fontStyle, text=fate_data[1][9], width=6, height=1, command=lambda:show_result(fm10_result)).place(x=120,y=120)
+    fm10_name = tk.Button(fm10, font=fontStyle, text=fate_data[1][9], width=6, height=1, command=lambda:show_result(fate_data,9)).place(x=120,y=120)
 
     fm11 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm11.grid(row=2,column=3)#戌
@@ -1040,7 +1156,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm11_local_t = tk.Label(fm11, text=fate_data[17][10], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm11_local = tk.Label(fm11, text='戌', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm11_result=[fate_data[1][10],fate_data[2][10],fate_data[3][10]]
-    fm11_name = tk.Button(fm11, font=fontStyle, text=fate_data[1][10], width=6, height=1, command=lambda:show_result(fm11_result)).place(x=120,y=120)
+    fm11_name = tk.Button(fm11, font=fontStyle, text=fate_data[1][10], width=6, height=1, command=lambda:show_result(fate_data,10)).place(x=120,y=120)
 
     fm12 =LabelFrame(root,width=w_frame,height=h_frame,relief="groove")
     fm12.grid(row=3,column=3)#亥
@@ -1074,7 +1190,7 @@ def fateplat_new(fate_data):    #命盤排列
     fm12_local_t = tk.Label(fm12, text=fate_data[17][11], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm12_result=[fate_data[1][11],fate_data[2][11],fate_data[3][11]]
-    fm12_name = tk.Button(fm12, font=fontStyle, text=fate_data[1][11], width=6, height=1, command=lambda:show_result(fm12_result)).place(x=120,y=120)
+    fm12_name = tk.Button(fm12, font=fontStyle, text=fate_data[1][11], width=6, height=1, command=lambda:show_result(fate_data,11)).place(x=120,y=120)
     #'''
     root.mainloop()
     p_status = 1
