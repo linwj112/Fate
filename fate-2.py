@@ -475,7 +475,31 @@ def star_explain(star_name):    #簡易星曜說明
         text.insert(END,"\n")
         text.insert(END,"父母\n")
         text.insert(END,"會對爸爸好，但是不會處理關係，也表示說容易帶有先天上的疾病問題。\n")
-
+    elif star_name == '斗君':
+        text.insert(END,star_name +"\n")
+        text.insert(END,"所謂「 一年之計在於春，一日之計在於晨 」，即在說明 '起頭' 的重要性，此力道關乎成敗致鉅。\n")
+        text.insert(END,"每一件事、每一個工作、每一段歷程、每一個舉動 - - - - - - - 等等，都有一個「起始點」，\n")
+        text.insert(END,"若起始點施力不當，往往一蹶不振，捲土重來則加倍辛苦。若能掌握這起始點的契機，一鼓作氣，往往事半功倍，成效卓著。\n")
+        text.insert(END,"故斗君所指，即是氣場介入的起始點 ! 是故 “流年斗君”為 “正月”，為一年的「起始月」。\n")
+        text.insert(END,"'天開於子、地闢於丑、人由寅始' ! 這 '先天之氣' 來自於地支 '子宮(天位)'，\n")
+        text.insert(END,"且經由命造的 '生月、生時' 的定位，將此 '先天之氣' 灌入 '子年斗君位'，\n")
+        text.insert(END,"因此氣來自於地支 '子宮' ，故名之 ! 此 '子年斗君位' 引導並推動著命造的行運 !\n")
+        text.insert(END,"而 '寅宮' 既是 '人位'，此 '後天之氣' 自然就在當宮(寅宮)囉 !\n")
+        text.insert(END,"除此，由 '寅宮' 起正月，順數生月所落之宮再起子時，逆數生時定 命宮，\n")
+        text.insert(END,"而順數生時則定 '身宮' ! 由此可知 '寅宮(後天斗君)' 就是 '命宮' 與 '身宮' 的源頭 !\n")
+        text.insert(END,"由此可以想見 '寅宮' 的重要性了 !\n")
+        text.insert(END,"流月、流日取法\n")
+        text.insert(END,"視本命盤之「寅宮」為十二宮之「何宮」?此宮即為後天斗君位。亦即寅宮即為「後天斗君」。\n")
+        text.insert(END,"則流年之「 何宮 」即為流年斗君，為正月，再順佈其餘十一個月。\n")
+        text.insert(END,"例如:本命盤寅宮是官祿宮，那他的本命斗君就是官祿宮。\n")
+        text.insert(END,"那他的流年斗君就是依照他流年命宮去找到流年官祿宮，\n")
+        text.insert(END,"就會是他流年斗君的位置。而這個位置就是流年的一月，\n")
+        text.insert(END,"並且依照順時鐘，一路排出十二個月。\n")
+        text.insert(END,"每個流月的命宮，為當月的初一，依此順時鐘排列出出一到三十，\n")
+        text.insert(END,"而每個排列到的位置就是那個留日的命宮，一樣可以再列出其餘十一宮位，\n")
+        text.insert(END,"成為流日命盤。\n")
+        text.insert(END,"此流月、流日的日期都是採用農曆計之\n")
+    
     enter_bt=tk.Button(root_explain, font=fontStyle, text='確定', width = 4, height=1,command=root_explain.destroy)#root_explain.quit
     enter_bt.place(x=350,y=250)
     root_explain.mainloop()
@@ -710,7 +734,7 @@ def fateplat_new(fate_data):    #命盤排列
     star_14.add_command(label="七殺星",command=lambda:star_explain('七殺星'))#
     star_14.add_command(label="破軍星",command=lambda:star_explain('破軍星'))#
 
-    #建立功能表類別物件，和將此功能表類別命名星曜說明
+    #建立功能表類別物件，和將此功能表類別命名煞星空亡說明說明
     star_flytk = Menu(menubar, font=('Keiu', 14 ))
     menubar.add_cascade(label="煞星空亡說明",menu=star_flytk)
 
@@ -722,7 +746,7 @@ def fateplat_new(fate_data):    #命盤排列
     star_flytk.add_command(label="地劫",command=lambda:star_explain('地劫'))#
     star_flytk.add_command(label="地空",command=lambda:star_explain('地空'))#
 
-    #建立功能表類別物件，和將此功能表類別命名星曜說明
+    #建立功能表類別物件，和將此功能表類別命名四化星說明
     star_4fly = Menu(menubar, font=('Keiu', 14 ))
     menubar.add_cascade(label="四化星說明",menu=star_4fly)
     star_4fly.add_command(label="四化星說明",command=lambda:star_explain('四化星說明'))#
@@ -732,7 +756,13 @@ def fateplat_new(fate_data):    #命盤排列
     star_4fly.add_command(label="化科",command=lambda:star_explain('化科'))#
     star_4fly.add_command(label="化忌",command=lambda:star_explain('化忌'))#
 
-    #建立功能表類別物件，和將此功能表類別命名About
+    #建立功能表類別物件，和將此功能表類別命名斗君說明
+    do_gun = Menu(menubar, font=('Keiu', 14 ))
+    menubar.add_cascade(label="斗君說明",menu=do_gun)
+    do_gun.add_command(label="斗君說明",command=lambda:star_explain('斗君'))#
+    #plate_place.add_separator()    
+
+    #建立功能表類別物件，和將此功能表類別命名Help
     helpmenu = Menu(menubar, font=('Keiu', 14 ))
     menubar.add_cascade(label="Help",menu=helpmenu)
     #About功能表內建立功能表清單    
@@ -747,6 +777,12 @@ def fateplat_new(fate_data):    #命盤排列
     tk.Label(root, font=fontStyle, text=fate_data[0][1], width=8, height=1).place(x=800,y=240)
     tk.Label(root, font=fontStyle, text=fate_data[0][2]+'日', width=8, height=1).place(x=800,y=260)
     tk.Label(root, font=fontStyle, text=fate_data[0][3]+'時', width=8, height=1).place(x=800,y=280)
+    td_fdata = datetime.datetime.now()  #當下日期時間
+    day_lunar = sxtwl.fromSolar(td_fdata.year, td_fdata.month, td_fdata.day) 
+    t_y = day_lunar.getLunarYear()
+    t_m = day_lunar.getLunarMonth()
+    t_d = day_lunar.getLunarDay()
+    tk.Label(root, font=fontStyle, text='今天是農曆:'+str(t_y)+'年'+str(t_m)+'月'+str(t_d)+'日', width=30, height=1).place(x=300,y=180)
 
     #*********************** 大限流年資料 ****************************
     #s_y = fate_data[7][0]   #大限流年起始數
@@ -2296,6 +2332,11 @@ def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
         #print(temp_lckg)
     return(star_a_6,star_a_8,month_start_1,month_start_2,time_start_1,time_start_2,temp_lckg)
 
+def l_month_date(): #流月流日排盤
+
+
+    return
+
 def data_save(save_data):   #儲存命主資料
     with open((save_data[1]+save_data[0]+'.txt'),"w",encoding='utf-8') as output:
         for i in save_data:
@@ -2763,11 +2804,11 @@ def quit_prg(): #離開程式
 
 def health():   #十二宮代表的身體部位
     fpbg ='#F0F0F0'#'lightgreen''#F0F0F0'
-    health =[['生殖','泌尿'],['肛門',''],['右腳',''],['右腹','右腰'],['右胸',''],['右手','右肩'],
-             ['頭部','右眼'],['臉部','左眼'],['左手','左肩'],['左胸',''],['左腹','卵巢'],['左腳','']]
-    root_hralth = Tk()
-    screenwidth = root_hralth.winfo_screenwidth()
-    screenheight = root_hralth.winfo_screenheight()
+    health =[['生殖','泌尿，膀胱'],['肛門',''],['右腳',''],['腹部','腸胃'],['胸部','右胸'],['右手','右肩'],
+             ['頭部、右眼','精神、神經'],['臉部、左眼','頸部、淋巴'],['左手','左肩'],['左胸','背部、心臟'],['左腹、腎臟','卵巢'],['左腳','']]
+    root_health = Tk()
+    screenwidth = root_health.winfo_screenwidth()
+    screenheight = root_health.winfo_screenheight()
     #print(screenwidth)
     #print(screenheight)
     w_win = 1200
@@ -2776,100 +2817,117 @@ def health():   #十二宮代表的身體部位
     h_frame = 163
     x_offset = (screenwidth - w_win) / 2
     y_offset = ((screenheight - h_win) / 2)
-    root_hralth.title("身體健康")
-    root_hralth.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
-    root_hralth.resizable(False, False)
+    root_health.title("身體健康")
+    root_health.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
+    root_health.resizable(False, False)
     style = Style()
     style.theme_use("alt")
     fontStyle = tkFont.Font(family="標楷體", size=14)
     fontStyle_1 = tkFont.Font(family="標楷體", size=20)
    
     #*********************** 十二宮繪製布局 ****************************
-    fm1 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm1 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm1.grid(row=3,column=2)#子
-    tk.Label(fm1, text=health[0][0],font=fontStyle, width=4, height=1).place(x=0,y=0)  #紫微星系  
-    tk.Label(fm1, text=health[0][1],font=fontStyle, width=4, height=1).place(x=50,y=0) #紫微星系四化
+    tk.Label(fm1, text=health[0][0],font=fontStyle, width=10, height=1).place(x=0,y=0)  #  
+    tk.Label(fm1, text=health[0][1],font=fontStyle, width=10, height=1).place(x=0,y=30) #
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #命盤宮位地支--固定
-    fm1_name = tk.Button(fm1, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)   #命盤宮位名稱
+    fm1_name = tk.Button(fm1, font=fontStyle, text='水', width=6, height=1, command='').place(x=120,y=120)   #命盤宮位名稱
 
-    fm2 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm2 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm2.grid(row=3,column=1)#丑
-    tk.Label(fm2, text=health[1][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm2, text=health[1][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm2, text=health[1][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm2, text=health[1][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm2_local = tk.Label(fm2, text='丑', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm2_name = tk.Button(fm2, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm2_name = tk.Button(fm2, font=fontStyle, text='土', width=6, height=1, command='').place(x=120,y=120)
 
-    fm3 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm3 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm3.grid(row=3,column=0)#寅
-    tk.Label(fm3, text=health[2][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm3, text=health[2][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm3, text=health[2][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm3, text=health[2][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm3_local = tk.Label(fm3, text='寅', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm3_name = tk.Button(fm3, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm3_name = tk.Button(fm3, font=fontStyle, text='木', width=6, height=1, command='').place(x=120,y=120)
 
-    fm4 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm4 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm4.grid(row=2,column=0)#卯
-    tk.Label(fm4, text=health[3][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm4, text=health[3][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm4, text=health[3][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm4, text=health[3][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm4_local = tk.Label(fm4, text='卯', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm4_name = tk.Button(fm4, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm4_name = tk.Button(fm4, font=fontStyle, text='木', width=6, height=1, command='').place(x=120,y=120)
 
-    fm5 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm5 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm5.grid(row=1,column=0)#辰
-    tk.Label(fm5, text=health[4][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm5, text=health[4][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm5, text=health[4][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm5, text=health[4][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm5_local = tk.Label(fm5, text='辰', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm5_name = tk.Button(fm5, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm5_name = tk.Button(fm5, font=fontStyle, text='土', width=6, height=1, command='').place(x=120,y=120)
 
-    fm6 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm6 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm6.grid(row=0,column=0)#巳
-    tk.Label(fm6, text=health[5][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm6, text=health[5][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm6, text=health[5][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm6, text=health[5][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm6_local = tk.Label(fm6, text='巳', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm6_name = tk.Button(fm6, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm6_name = tk.Button(fm6, font=fontStyle, text='火', width=6, height=1, command='').place(x=120,y=120)
 
-    fm7 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm7 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm7.grid(row=0,column=1)#午
-    tk.Label(fm7, text=health[6][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm7, text=health[6][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm7, text=health[6][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm7, text=health[6][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm7_local = tk.Label(fm7, text='午', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm7_name = tk.Button(fm7, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm7_name = tk.Button(fm7, font=fontStyle, text='火', width=6, height=1, command='').place(x=120,y=120)
 
-    fm8 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm8 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm8.grid(row=0,column=2)#未
-    tk.Label(fm8, text=health[7][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm8, text=health[7][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm8, text=health[7][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm8, text=health[7][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm8_local = tk.Label(fm8, text='未', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm8_name = tk.Button(fm8, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm8_name = tk.Button(fm8, font=fontStyle, text='土', width=6, height=1, command='').place(x=120,y=120)
 
-    fm9 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm9 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm9.grid(row=0,column=3)#申
-    tk.Label(fm9, text=health[8][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm9, text=health[8][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm9, text=health[8][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm9, text=health[8][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm9_local = tk.Label(fm9, text='申', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm9_name = tk.Button(fm9, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm9_name = tk.Button(fm9, font=fontStyle, text='金', width=6, height=1, command='').place(x=120,y=120)
 
-    fm10 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm10 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm10.grid(row=1,column=3)#酉
-    tk.Label(fm10, text=health[9][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm10, text=health[9][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm10, text=health[9][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm10, text=health[9][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm10_local = tk.Label(fm10, text='酉', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm10_name = tk.Button(fm10, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm10_name = tk.Button(fm10, font=fontStyle, text='金', width=6, height=1, command='').place(x=120,y=120)
 
-    fm11 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm11 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm11.grid(row=2,column=3)#戌
-    tk.Label(fm11, text=health[10][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm11, text=health[10][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm11, text=health[10][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm11, text=health[10][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm11_local = tk.Label(fm11, text='戌', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm11_name = tk.Button(fm11, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm11_name = tk.Button(fm11, font=fontStyle, text='土', width=6, height=1, command='').place(x=120,y=120)
 
-    fm12 =LabelFrame(root_hralth,width=w_frame,height=h_frame,relief="groove")
+    fm12 =LabelFrame(root_health,width=w_frame,height=h_frame,relief="groove")
     fm12.grid(row=3,column=3)#亥
-    tk.Label(fm12, text=health[11][0],font=fontStyle, width=4, height=1).place(x=0,y=0)
-    tk.Label(fm12, text=health[11][1],font=fontStyle, width=4, height=1).place(x=60,y=0)
+    tk.Label(fm12, text=health[11][0],font=fontStyle, width=10, height=1).place(x=0,y=0)
+    tk.Label(fm12, text=health[11][1],font=fontStyle, width=10, height=1).place(x=0,y=30)
     fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm12_name = tk.Button(fm12, font=fontStyle, text='', width=6, height=1, command='').place(x=120,y=120)
+    fm12_name = tk.Button(fm12, font=fontStyle, text='水', width=6, height=1, command='').place(x=120,y=120)
     #'''
-    root_hralth.mainloop()
+    columns =['五行','五臟','五腑','五體','五竅','五華','五志','五液','五脈']#'','','','','','','','',''
+    tv_health=ttk.Treeview(root_health,height=6,show='headings',columns=columns)
+    for i in columns:
+        tv_health.column(i,width = 60,anchor='center')
+        tv_health.heading(i, text=i)
+
+    five_code = ['木','火','土','金','水']
+    b_c = [['肝','膽','筋','目','爪','怒','淚','弦'],
+                 ['心','小腸','脈','舌','面','喜','汗','洪'],
+                 ['脾','胃','肉','口','唇','思','涎','緩'],
+                 ['肺','大腸','皮','鼻','毛','憂','涕','浮'],
+                 ['腎','膀胱','骨','耳','髮','恐','唾','沉']] 
+
+    for m in range(0,len(five_code)):
+        tv_health.insert('',m,values=(five_code[m],b_c[m][0],b_c[m][1],b_c[m][2],b_c[m][3],b_c[m][4],b_c[m][5],b_c[m][6],b_c[m][7]))
+    tv_health.place(x=325,y=180)
+
+    root_health.mainloop()
     return
 
 if __name__ == '__main__':
