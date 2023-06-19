@@ -12,6 +12,8 @@ import copy
 import sxtwl
 import pyscreenshot as ImageGrab
 from tkinter import messagebox
+import os
+
 def show_result(result_data,f_number):   #顯示宮位主星說明
     #*-----傳入排盤程式的變數內容-----*
     #xx  #基本資料 -->0
@@ -1254,7 +1256,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     location_y = 0
 
     var_rb = tk.IntVar()
-    var_rb.set(sbase_data[2])
+    var_rb.set(int(sbase_data[2]))
 
     name_L = Label(root_input, font=fontStyle, text="姓  名")#姓名
     name_L.place(x = location_x, y = location_y)
@@ -1269,7 +1271,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
 
     #***************陽曆生日**************************************************
     var_bd = tk.IntVar()
-    var_bd.set(sbase_data[3])
+    var_bd.set(int(sbase_data[3]))
 
     bd_yl = Radiobutton(root_input, font=fontStyle, text="陽曆生日",variable=var_bd, value=1,command='')#陽曆生日
     bd_yl.place(x = location_x, y = location_y+50)
@@ -1278,7 +1280,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     yearcb = ttk.Combobox(root_input,textvariable=var_year, width=4, height=2,font=fontStyle)
     yearcb['values'] = (list(range(1911, 2024, 1)))
     yearcb.place(x = location_x+50, y = location_y+100)
-    yearcb.current(sbase_data[4])
+    yearcb.current(int(sbase_data[4])-1911)
     year_L = Label(root_input, font=fontStyle, text='年', width=4, height=1,bg='lightblue')
     year_L.place(x=location_x+125,y=location_y+100)
 
@@ -1286,7 +1288,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     monthcb = ttk.Combobox(root_input,textvariable=var_month, width=4, height=2, font=fontStyle)
     monthcb['values'] = ['1','2','3','4','5','6','7','8','9','10','11','12']
     monthcb.place(x = location_x+215, y = location_y+100)
-    monthcb.current(sbase_data[5])
+    monthcb.current(int(sbase_data[5])-1)
     month_L = Label(root_input, font=fontStyle, text='月', width=4, height=1,bg='lightblue')
     month_L.place(x=location_x+290,y=location_y+100)
  
@@ -1294,7 +1296,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     datecb = ttk.Combobox(root_input,textvariable=var_date, width=4, height=2, font=fontStyle)
     datecb['values'] = (list(range(1, 31, 1)))
     datecb.place(x = location_x+380, y = location_y+100)
-    datecb.current(sbase_data[6])
+    datecb.current(int(sbase_data[6])-1)
     date_L = Label(root_input, font=fontStyle, text='日', width=4, height=1,bg='lightblue')
     date_L.place(x=location_x+455,y=location_y+100)
     #***************農曆生日**************************************************
@@ -1306,7 +1308,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     yearcb_old = ttk.Combobox(root_input,textvariable=var_old_year, width=4, height=2,font=fontStyle)
     yearcb_old['values'] = (list(range(1911, 2024, 1)))
     yearcb_old.place(x = location_x+50, y = location_y+200)
-    yearcb_old.current(sbase_data[7])
+    yearcb_old.current(int(sbase_data[7])-1911)
     year_old_L = Label(root_input, font=fontStyle, text='年', width=4, height=1,bg='lightblue')
     year_old_L.place(x=location_x+125,y=location_y+200)
 
@@ -1314,7 +1316,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     monthcb_old = ttk.Combobox(root_input,textvariable=var_old_month, width=4, height=2, font=fontStyle)
     monthcb_old['values'] = ['1','2','3','4','5','6','7','8','9','10','11','12']
     monthcb_old.place(x = location_x+215, y = location_y+200)
-    monthcb_old.current(sbase_data[8])
+    monthcb_old.current(int(sbase_data[8])-1)
     month_old_L = Label(root_input, font=fontStyle, text='月', width=4, height=1,bg='lightblue')
     month_old_L.place(x=location_x+290,y=location_y+200)
  
@@ -1322,7 +1324,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     datecb_old = ttk.Combobox(root_input,textvariable=var_old_date, width=4, height=2, font=fontStyle)
     datecb_old['values'] = (list(range(1, 31, 1)))
     datecb_old.place(x = location_x+380, y = location_y+200)
-    datecb_old.current(sbase_data[9])
+    datecb_old.current(int(sbase_data[9])-1)
     date_old_L = Label(root_input, font=fontStyle, text='日', width=4, height=1,bg='lightblue')
     date_old_L.place(x=location_x+455,y=location_y+200)
 
@@ -1334,7 +1336,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     clockcb = ttk.Combobox(root_input,textvariable=var_clock, width=4, height=2, font=fontStyle)
     clockcb['values'] = (list(range(0, 24, 1)))
     clockcb.place(x = location_x+50, y = location_y+300)
-    clockcb.current(sbase_data[10])
+    clockcb.current(int(sbase_data[10]))
     clock_L = Label(root_input, font=fontStyle, text='點', width=4, height=1,bg='lightblue')
     clock_L.place(x=location_x+125,y=location_y+300)
 
@@ -1342,15 +1344,16 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     mintucb = ttk.Combobox(root_input,textvariable=var_mintu, width=4, height=2, font=fontStyle)
     mintucb['values'] = (list(range(0, 60, 1)))
     mintucb.place(x = location_x+215, y = location_y+300)
-    mintucb.current(sbase_data[11])
+    mintucb.current(int(sbase_data[11]))
     mintu_L = Label(root_input, font=fontStyle, text='分', width=4, height=1,bg='lightblue')
     mintu_L.place(x=location_x+290,y=location_y+300)
 
     var_time = tk.StringVar()
     timecb = ttk.Combobox(root_input,textvariable=var_time, width=4, height=2, font=fontStyle)
     timecb['values'] = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥']
+    sb_da = {'':0,'子':1,'丑':2,'寅':3,'卯':4,'辰':5,'巳':6,'午':7,'未':8,'申':9,'酉':10,'戌':11,'亥':12}
     timecb.place(x = location_x+380, y = location_y+300)
-    timecb.current(sbase_data[12])
+    timecb.current(sb_da[sbase_data[12]])
     time_L = Label(root_input, font=fontStyle, text='時', width=4, height=1,bg='lightblue')
     time_L.place(x=location_x+455,y=location_y+300)
     #**************時辰 end***************************************************
@@ -1402,12 +1405,13 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     data_4 = var_year.get() #陽曆年
     data_5 = var_month.get() #陽曆月
     data_6 = var_date.get() #陽曆日
-    data_7 = var_clock.get() #小時
-    data_8 = var_mintu.get() #分鐘
-    data_9 = var_time.get() #時辰
-    data_10 = var_old_year.get() #陰曆年
-    data_11 = var_old_month.get() #陰曆月
-    data_12 = var_old_date.get() #陰曆日
+    data_7 = var_old_year.get() #陰曆年
+    data_8 = var_old_month.get() #陰曆月
+    data_9 = var_old_date.get() #陰曆日    
+    data_10 = var_clock.get() #小時
+    data_11 = var_mintu.get() #分鐘
+    data_12 = var_time.get() #時辰
+
 
     save_data=[data_0,data_1,data_2,data_3,data_4,data_5,data_6,data_7,data_8,data_9,data_10,data_11,data_12]
     data_save(save_data)
@@ -2930,11 +2934,59 @@ def health():   #十二宮代表的身體部位
     root_health.mainloop()
     return
 
+def load_data():
+    loadfile = []
+    loadfile.append('')
+    filenames =os.listdir(os.getcwd())
+    #print(filenames)
+    for f in filenames:#
+        if f.split('.')[-1] == 'txt' :#f
+            loadfile.append(f)#os.path.join(dirpath,f)
+    #print(loadfile)
+    root_load = Tk()
+    screenwidth = root_load.winfo_screenwidth()
+    screenheight = root_load.winfo_screenheight()
+    w_win = 600
+    h_win = 400
+    x_offset = (screenwidth - w_win) / 2
+    y_offset = ((screenheight - h_win) / 2)
+    root_load.title("選擇命主檔案")
+    root_load.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
+    root_load.resizable(False, False)
+    style = Style()
+    style.theme_use("alt")
+    fontStyle = tkFont.Font(family="標楷體", size=20)#Keiu 16
+
+    #*********************** 選擇資料 ****************************
+
+    data_name_L = Label(root_load, font=fontStyle, text="資料檔名:")
+    data_name_L.place(x = 10, y = 30)
+
+    var_data_name = tk.StringVar()
+    monthcb_old = ttk.Combobox(root_load,textvariable=var_data_name, width=20, height=2, font=fontStyle)
+    monthcb_old['values'] = loadfile
+    monthcb_old.place(x = 150, y = 30)
+    monthcb_old.current(0)
+    enter_bt=tk.Button(root_load, font=fontStyle, text='確定', width = 4, height=1,command=root_load.quit)#,command=root_input.destroy
+    enter_bt.place(x=150,y=60)
+    root_load.mainloop() 
+    file_data = var_data_name.get()
+    root_load.destroy() 
+    return(file_data)
 if __name__ == '__main__':
+    file_data = load_data()
     run_fate = 0
     #基本資料格式
     #0:編號，1:姓名，2:男女，3:陰陽曆，4:陽年，5:陽月，6:陽日，7:陰年，8:陰月，9:陰日，10:時，11:分，12:時辰
-    sbase_data =['0001','林昱廷',1,1,87,5,21,56,8,2,13,30,0]
+    
+    sbase_data =[]
+    if file_data == '' :
+        sbase_data =['0001','林昱廷',1,1,87,5,21,87,4,27,13,30,0]
+    else:
+        with open(file_data,'r',encoding="utf-8") as f:
+            for line in f.readlines():
+                sbase_data.append(line.split('\n')[0])
+
     while run_fate <= 2:
         b_d=keyin_data(sbase_data)      #輸入命主的基本資料
         fate_data = main_module(b_d)    #產生排盤所需資料
