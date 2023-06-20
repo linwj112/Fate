@@ -132,9 +132,6 @@ def show_result(result_data,f_number):   #顯示宮位主星說明
         print(result_data[1][f_number],"無主星") 
         m+=1
     root_show_result.mainloop()
-
-
-
     return 0
 
 def fate_palace(palace_name):   #說明十二宮的特質及用法
@@ -581,7 +578,6 @@ def aboutme():  #顯示關於本程式
     enter_bt=tk.Button(root_about, font=fontStyle, text='確定', width = 4, height=1,command=root_about.destroy)#root_about.quit
     enter_bt.place(x=350,y=250)
     root_about.mainloop()
-
     return
 
 def line34(drawtray,location_kk):
@@ -593,13 +589,11 @@ def line34(drawtray,location_kk):
         canvas.create_line(300,234,750,489)
         canvas.create_line(300,234,900,163)
         canvas.create_line(900,160,750,489)
-
     elif location_kk == "1":
         canvas.create_line(450,489,750,153) #對宮
         canvas.create_line(450,489,300,160)
         canvas.create_line(300,163,900,234)
         canvas.create_line(900,234,450,489)
-
     elif location_kk == "2":
         canvas.create_line(280,498,915,153) #對宮
         canvas.create_line(296,498,450,163)
@@ -621,7 +615,6 @@ def line34(drawtray,location_kk):
         canvas.create_line(450,489,300,160)
         canvas.create_line(300,163,900,234)
         canvas.create_line(900,234,450,489)
-
     elif location_kk == "6":
         canvas.create_line(450,163,750,489) #對宮
         canvas.create_line(296,498,450,163)
@@ -632,7 +625,6 @@ def line34(drawtray,location_kk):
         canvas.create_line(300,408,750,163)
         canvas.create_line(900,489,750,163)
         canvas.create_line(300,408,900,489)
-
     elif location_kk == "8":
         canvas.create_line(280,498,915,153) #對宮
         canvas.create_line(300,234,750,489)
@@ -643,7 +635,6 @@ def line34(drawtray,location_kk):
         canvas.create_line(450,489,300,160)
         canvas.create_line(300,163,900,234)
         canvas.create_line(900,234,450,489)
-
     elif location_kk == "10":
         canvas.create_line(900,408,280,234) #對宮
         canvas.create_line(296,498,450,163)
@@ -654,19 +645,14 @@ def line34(drawtray,location_kk):
         canvas.create_line(300,408,750,163)
         canvas.create_line(900,489,750,163)
         canvas.create_line(300,408,900,489)
-
     return
 
 def fateplat_new(fate_data):    #命盤排列
     p_status = 0
-
     fpbg ='#F0F0F0'#'lightgreen''#F0F0F0'
-
     root = Tk()
     screenwidth = root.winfo_screenwidth()
     screenheight = root.winfo_screenheight()
-    #print(screenwidth)
-    #print(screenheight)
     w_win = 1200
     h_win = 652
     w_frame = 300
@@ -680,11 +666,10 @@ def fateplat_new(fate_data):    #命盤排列
     style.theme_use("alt")
     fontStyle = tkFont.Font(family="標楷體", size=14)
     fontStyle_1 = tkFont.Font(family="標楷體", size=20)
-
     
     #********** 建立下拉式功能表 **********
     menubar = Menu(root)    #建立最上層功能表
-    #建立功能表類別物件，和將此功能表類別命名File
+    #建立功能表類別物件，和將此功能表類別命名Filemenu
     filemenu = Menu(menubar,tearoff=False, font=('Keiu', 14 ))
     menubar.add_cascade(label="檔案",menu=filemenu)
     #File功能表內建立功能表清單
@@ -777,14 +762,15 @@ def fateplat_new(fate_data):    #命盤排列
     #*********************** 基本資料 ****************************
     tk.Label(root, font=fontStyle, text=fate_data[0][0]+'年', width=8, height=1).place(x=800,y=220)
     tk.Label(root, font=fontStyle, text=fate_data[0][1], width=8, height=1).place(x=800,y=240)
-    tk.Label(root, font=fontStyle, text=fate_data[0][2]+'日', width=8, height=1).place(x=800,y=260)
-    tk.Label(root, font=fontStyle, text=fate_data[0][3]+'時', width=8, height=1).place(x=800,y=280)
+    tk.Label(root, font=fontStyle, text=fate_data[0][5]+fate_data[0][6]+'月', width=8, height=1).place(x=800,y=260)
+    tk.Label(root, font=fontStyle, text=fate_data[0][2]+'日', width=8, height=1).place(x=800,y=280)
+    tk.Label(root, font=fontStyle, text=fate_data[0][4]+fate_data[0][3]+'時', width=8, height=1).place(x=800,y=300)
     td_fdata = datetime.datetime.now()  #當下日期時間
     day_lunar = sxtwl.fromSolar(td_fdata.year, td_fdata.month, td_fdata.day) 
     t_y = day_lunar.getLunarYear()
     t_m = day_lunar.getLunarMonth()
     t_d = day_lunar.getLunarDay()
-    tk.Label(root, font=fontStyle, text='今天是農曆:'+str(t_y)+'年'+str(t_m)+'月'+str(t_d)+'日', width=30, height=1).place(x=300,y=180)
+    tk.Label(root, font=fontStyle,fg='red', text='今天是農曆:'+str(t_y)+'年'+str(t_m)+'月'+str(t_d)+'日', width=30, height=1).place(x=300,y=180)
 
     #*********************** 大限流年資料 ****************************
     #s_y = fate_data[7][0]   #大限流年起始數
@@ -1235,14 +1221,11 @@ def fateplat_new(fate_data):    #命盤排列
     return(p_status)
 
 def keyin_data(sbase_data): #輸入基本資料生辰八字
-
     root_input = Tk()
     screenwidth = root_input.winfo_screenwidth()
     screenheight = root_input.winfo_screenheight()
     w_win = 600
     h_win = 400
-    #w_frame = 300
-    #h_frame = 163
     x_offset = (screenwidth - w_win) / 2
     y_offset = ((screenheight - h_win) / 2)
     root_input.title("生辰年月日時輸入")
@@ -1277,7 +1260,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     bd_yl.place(x = location_x, y = location_y+50)
 
     var_year = tk.IntVar()
-    yearcb = ttk.Combobox(root_input,textvariable=var_year, width=4, height=2,font=fontStyle)
+    yearcb = ttk.Combobox(root_input,textvariable=var_year, width=4, height=5,font=fontStyle)
     yearcb['values'] = (list(range(1911, 2024, 1)))
     yearcb.place(x = location_x+50, y = location_y+100)
     yearcb.current(int(sbase_data[4])-1911)
@@ -1285,7 +1268,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     year_L.place(x=location_x+125,y=location_y+100)
 
     var_month = tk.StringVar()
-    monthcb = ttk.Combobox(root_input,textvariable=var_month, width=4, height=2, font=fontStyle)
+    monthcb = ttk.Combobox(root_input,textvariable=var_month, width=4, height=5, font=fontStyle)
     monthcb['values'] = ['1','2','3','4','5','6','7','8','9','10','11','12']
     monthcb.place(x = location_x+215, y = location_y+100)
     monthcb.current(int(sbase_data[5])-1)
@@ -1293,7 +1276,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     month_L.place(x=location_x+290,y=location_y+100)
  
     var_date = tk.IntVar()
-    datecb = ttk.Combobox(root_input,textvariable=var_date, width=4, height=2, font=fontStyle)
+    datecb = ttk.Combobox(root_input,textvariable=var_date, width=4, height=5, font=fontStyle)
     datecb['values'] = (list(range(1, 31, 1)))
     datecb.place(x = location_x+380, y = location_y+100)
     datecb.current(int(sbase_data[6])-1)
@@ -1305,7 +1288,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     bd_ol.place(x = location_x, y = location_y+150)
 
     var_old_year = tk.IntVar()
-    yearcb_old = ttk.Combobox(root_input,textvariable=var_old_year, width=4, height=2,font=fontStyle)
+    yearcb_old = ttk.Combobox(root_input,textvariable=var_old_year, width=4, height=5,font=fontStyle)
     yearcb_old['values'] = (list(range(1911, 2024, 1)))
     yearcb_old.place(x = location_x+50, y = location_y+200)
     yearcb_old.current(int(sbase_data[7])-1911)
@@ -1313,7 +1296,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     year_old_L.place(x=location_x+125,y=location_y+200)
 
     var_old_month = tk.StringVar()
-    monthcb_old = ttk.Combobox(root_input,textvariable=var_old_month, width=4, height=2, font=fontStyle)
+    monthcb_old = ttk.Combobox(root_input,textvariable=var_old_month, width=4, height=5, font=fontStyle)
     monthcb_old['values'] = ['1','2','3','4','5','6','7','8','9','10','11','12']
     monthcb_old.place(x = location_x+215, y = location_y+200)
     monthcb_old.current(int(sbase_data[8])-1)
@@ -1321,7 +1304,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     month_old_L.place(x=location_x+290,y=location_y+200)
  
     var_old_date = tk.IntVar()
-    datecb_old = ttk.Combobox(root_input,textvariable=var_old_date, width=4, height=2, font=fontStyle)
+    datecb_old = ttk.Combobox(root_input,textvariable=var_old_date, width=4, height=5, font=fontStyle)
     datecb_old['values'] = (list(range(1, 31, 1)))
     datecb_old.place(x = location_x+380, y = location_y+200)
     datecb_old.current(int(sbase_data[9])-1)
@@ -1333,7 +1316,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     bd_time_L.place(x = location_x, y = location_y+250)
 
     var_clock = tk.IntVar()
-    clockcb = ttk.Combobox(root_input,textvariable=var_clock, width=4, height=2, font=fontStyle)
+    clockcb = ttk.Combobox(root_input,textvariable=var_clock, width=4, height=5, font=fontStyle)
     clockcb['values'] = (list(range(0, 24, 1)))
     clockcb.place(x = location_x+50, y = location_y+300)
     clockcb.current(int(sbase_data[10]))
@@ -1341,7 +1324,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     clock_L.place(x=location_x+125,y=location_y+300)
 
     var_mintu = tk.IntVar()
-    mintucb = ttk.Combobox(root_input,textvariable=var_mintu, width=4, height=2, font=fontStyle)
+    mintucb = ttk.Combobox(root_input,textvariable=var_mintu, width=4, height=5, font=fontStyle)
     mintucb['values'] = (list(range(0, 60, 1)))
     mintucb.place(x = location_x+215, y = location_y+300)
     mintucb.current(int(sbase_data[11]))
@@ -1349,7 +1332,7 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     mintu_L.place(x=location_x+290,y=location_y+300)
 
     var_time = tk.StringVar()
-    timecb = ttk.Combobox(root_input,textvariable=var_time, width=4, height=2, font=fontStyle)
+    timecb = ttk.Combobox(root_input,textvariable=var_time, width=4, height=5, font=fontStyle)
     timecb['values'] = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥']
     sb_da = {'':0,'子':1,'丑':2,'寅':3,'卯':4,'辰':5,'巳':6,'午':7,'未':8,'申':9,'酉':10,'戌':11,'亥':12}
     timecb.place(x = location_x+380, y = location_y+300)
@@ -1362,12 +1345,6 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     number_E = Entry(root_input, width=10, font=fontStyle)
     number_E.place(x = location_x+400, y = location_y+350)
     number_E.insert(0,sbase_data[0])#內定編號
-
-    #enter_bt=tk.Button(root_input, font=fontStyle, text='儲存', width = 4, height=1,command=lambda:data_save(save_data))#,command=root_input.destroy
-    #enter_bt.place(x=location_x+250,y=location_y+350)
-    #enter_bt=tk.Button(root_input, font=fontStyle, text='載入', width = 4, height=1,command=lambda:data_load())#,command=root_input.destroy
-    #enter_bt.place(x=location_x+350,y=location_y+350)
-    #print(temp)
 
     root_input.mainloop()
 
@@ -1395,7 +1372,6 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     base_8 = var_time.get()     #時辰
 
     i_base_data = [base_0,base_1,base_2,base_3,base_4,base_5,base_6,base_7,base_8]
-    #data_save(save_data)
 
     #********** save data **********
     data_0 = number_E.get() #編號
@@ -1412,7 +1388,6 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
     data_11 = var_mintu.get() #分鐘
     data_12 = var_time.get() #時辰
 
-
     save_data=[data_0,data_1,data_2,data_3,data_4,data_5,data_6,data_7,data_8,data_9,data_10,data_11,data_12]
     data_save(save_data)
     root_input.destroy()
@@ -1423,7 +1398,6 @@ def keyin_data(sbase_data): #輸入基本資料生辰八字
 
 def set_4star_limit(year_tenkan,year_dichi,step1_a,f_time): #求大小限及太歲的火鈴羊陀資料
     #*-----安大、小限及流年 火、鈴-----*
-
     year_dichi  #大小限流年地支
     f_time  #出生時辰
     fl_start =[]  #火星,鈴星
@@ -1440,16 +1414,13 @@ def set_4star_limit(year_tenkan,year_dichi,step1_a,f_time): #求大小限及太�
     temp_F_1 = step11_1[year_dichi]#求出火星起始地支
     temp_F_2 = step1_a[temp_F_1]#求出起始地支的數
     temp_F_3 = step1_a[f_time]#求出出生時的數
-    temp_F_4 = (temp_F_2+temp_F_3)%12 #火星的數
-    #print(temp_F_4) #火星宮位
+    temp_F_4 = (temp_F_2+temp_F_3)%12 #火星的數(火星的宮位)
     #dichi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥']    #十二地支
-    #print(dichi[temp_F_4]) #火星宮位
 
     temp_L_1 = step11_2[year_dichi]#求出鈴星起始地支
     temp_L_2 = step1_a[temp_L_1]#求出起始地支的數
     temp_L_3 = step1_a[f_time]#求出出生時的數
-    temp_L_4 = (temp_L_2+temp_L_3)%12 #鈴星的數
-    #print(dichi[temp_L_4]) #鈴星宮位
+    temp_L_4 = (temp_L_2+temp_L_3)%12 #鈴星的數(鈴星宮位)
 
     for i in range(0,12):
         if i ==temp_F_4:
@@ -1458,8 +1429,6 @@ def set_4star_limit(year_tenkan,year_dichi,step1_a,f_time): #求大小限及太�
             fl_start.append('')
     del fl_start[temp_L_4]
     fl_start.insert(temp_L_4,'鈴星')
-    
-    #print(time_start)
 
     #*-----安年大、小限及太歲 羊、陀-----*
     year_tenkan  #大小限流年天干
@@ -1502,10 +1471,8 @@ def fateplat_4star(Ly4star_data):   #大小限太歲四煞星排盤程式
     #l_fontStyle = tkFont.Font(family="標楷體", size=8)
 
     drawtray = Canvas(root_4star,width=1200,height=652)   #設定三方四正畫布
-    
 
     #****************** 各流年四化飛星 ***********************
-    #'''
     tk.Label(root_4star, text=('大限四化:',Ly4star_data[12][0]), width=25, height=1,bg=lfpbg).place(x=320,y=200)#大限流年四化飛星
     tk.Label(root_4star, text=('小限四化:',Ly4star_data[12][1]), width=25, height=1,bg=lfpbg).place(x=320,y=240)#小限流年四化飛星
     tk.Label(root_4star, text=('太歲四化:',Ly4star_data[12][2]), width=25, height=1,bg=lfpbg).place(x=320,y=280)#太歲流年四化飛星
@@ -1520,7 +1487,7 @@ def fateplat_4star(Ly4star_data):   #大小限太歲四煞星排盤程式
     tk.Label(root_4star, text='小羊陀', width=6, height=1,bg=lfpbg).place(x=790,y=230)#大限流年擎羊、陀羅
     tk.Label(root_4star, text='太羊陀', width=6, height=1,bg=lfpbg).place(x=850,y=230)#大限流年擎羊、陀羅
     tk.Label(root_4star, text='如果沒有小限命宮，則是大小限命宮同宮位', width=40, height=1,bg=lfpbg).place(x=550,y=330)#大限流年擎羊、陀羅
-    #'''
+
     #****************** 流年煞忌十二宮繪製布局 ***********************
     fm1 =LabelFrame(root_4star,width=w_frame,height=h_frame,relief="groove")
     fm1.grid(row=3,column=2)#子
@@ -2025,6 +1992,7 @@ def fateplat_4star(Ly4star_data):   #大小限太歲四煞星排盤程式
     fm12_local_t = tk.Label(fm12, text=Ly4star_data[0][11], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm12_name = tk.Button(fm12, text=Ly4star_data[8][11], width=6, height=1, command = lambda:line34(drawtray,'11')).place(x=180,y=120)
+
     #---------***** 排大限流年 *****----------
     #*********************** 大限流年資料 ****************************
     s_y = Ly4star_data[2][0]   #大限流年起始數
@@ -2074,7 +2042,6 @@ def fateplat_4star(Ly4star_data):   #大小限太歲四煞星排盤程式
                 tk.Label(fm10, text=bg_lim[(3-j)%12], width=8, height=1,bg='lightblue').place(x=180,y=80)
                 tk.Label(fm11, text=bg_lim[(2-j)%12], width=8, height=1,bg='lightblue').place(x=180,y=80)
                 tk.Label(fm12, text=bg_lim[(1-j)%12], width=8, height=1,bg='lightblue').place(x=180,y=80)
-    #'''
     root_4star.mainloop()
     return
 
@@ -2092,7 +2059,7 @@ def fateplat_4star_data(fate_data): #大小限流年四煞星排盤程式keyin�
     old_year=(abs(td_fdata-fdata).days)/365 #實際歲數
     dichi_4star={0:'子',1:'丑',2:'寅',3:'卯',4:'辰',5:'巳',6:'午',7:'未',8:'申',9:'酉',10:'戌',11:'亥'}    #十二地支
 
-    big_limit_start = fate_data[7][0] #大限起始歲數
+    #big_limit_start = fate_data[7][0] #大限起始歲數
     ftype_place_m = fate_data[4]   #命宮所在為置,起大限用
 
     s_y = fate_data[7][0]   #大限流年起始數
@@ -2162,7 +2129,6 @@ def fateplat_4star_data(fate_data): #大小限流年四煞星排盤程式keyin�
     month_start_2 = fate_data[10]   #右弼
     time_start_1 = fate_data[12]    #文昌
     time_start_2 = fate_data[13]    #文曲 
-
 
     l_4hwa = {'甲':['廉貞','破軍','武曲','太陽'],'乙':['天機','天梁','紫微','太陰'],
               '丙':['天同','天機','文昌','廉貞'],'丁':['太陰','天同','天機','巨門'],
@@ -2390,8 +2356,39 @@ def main_module(b_d):   #產生排盤資料
     f_time = xx[3]
 
     tenkan = {'甲':0,'乙':1,'丙':0,'丁':1,'戊':0,'己':1,'庚':0,'辛':1,'壬':0,'癸':1}   #十天干
-    dichi = {'子':0,'丑':1,'寅':2,'卯':3,'辰':4,'巳':5,'午':6,'未':7,'申':8,'酉':9,'戌':10,'亥':11}    #十二地支
+    tenkan_a = {'甲':1,'乙':2,'丙':3,'丁':4,'戊':5,'己':6,'庚':7,'辛':8,'壬':9,'癸':10}   #十天干
+    tenkan_b = {1:'甲',2:'乙',3:'丙',4:'丁',5:'戊',6:'己',7:'庚',8:'辛',9:'壬',10:'癸'}   #十天干
 
+    dichi = {'子':0,'丑':1,'寅':2,'卯':3,'辰':4,'巳':5,'午':6,'未':7,'申':8,'酉':9,'戌':10,'亥':11}    #十二地支
+    dichi_b = {11:'子',12:'丑',1:'寅',2:'卯',3:'辰',4:'巳',5:'午',6:'未',7:'申',8:'酉',9:'戌',10:'亥'}    #十二地支
+
+    f_month_tenkan =tenkan_b[((tenkan_a[f_year_a])*2+f_month)%10]#本生月天干
+    f_momth_dichi = dichi_b[f_month]#本生月地支
+    xx[2] #本生日干支
+    temp_time_a =(tenkan_a[xx[2][0]])%5
+    temp_time_b =(1+dichi[f_time])%10
+    if temp_time_a ==1:
+        f_time_tenkan=tenkan_b[temp_time_b]#本時天干
+    elif temp_time_a ==2:
+        f_time_tenkan=tenkan_b[10 if ((2+temp_time_b)%10) == 0 else ((2+temp_time_b)%10)]#本時天干
+    elif temp_time_a ==3:
+        f_time_tenkan=tenkan_b[10 if ((4+temp_time_b)%10) == 0 else ((4+temp_time_b)%10)]#本時天干
+    elif temp_time_a ==4:
+        f_time_tenkan=tenkan_b[10 if ((6+temp_time_b)%10) == 0 else ((6+temp_time_b)%10)]#本時天干
+    elif temp_time_a ==0:
+        f_time_tenkan=tenkan_b[10 if ((8+temp_time_b)%10) == 0 else ((8+temp_time_b)%10)]#本時天干
+    f_time_dichi = f_time#本時地支
+
+    #print(f_year_a,f_year_b,'年')
+    #print(f_month_tenkan,f_momth_dichi,'月')
+    #print(xx[2][0],xx[2][1],'日')
+    #print(f_time_tenkan,f_time_dichi,'時')
+    temp_mmk = (f_month_tenkan,)  #將生月天干轉成tuple格式
+    temp_mmc = (f_momth_dichi,)  #將生月地支轉成tuple格式
+    temp_ttk =(f_time_tenkan,)  #將時干轉成tuple格式
+    xx=xx+temp_ttk    #加入生時天干
+    xx=xx+temp_mmk    #加入生月天干
+    xx=xx+temp_mmc    #加入生月地支
     #*step_1-----命宮身宮-----fmx_name_d******************************
     #ftype_place_m = 0 #= 0 命宮在子位, = 1 命宮在丑位  ::測試資料
     step1_a = dichi
@@ -2733,7 +2730,10 @@ def main_module(b_d):   #產生排盤資料
     #    xx[0][1] = f_year_b #本生年地支
     #    xx[1]   = # 生月-日
     #    xx[2]   = # 生日干支
-    #    xx[3]   = # 生時
+    #    xx[3]   = # 生時地支
+    #    xx[4]   = # 生時天干
+    #    xx[5]   = # 生月天干
+    #    xx[6]   = # 生月地支
     #plate_place = 定十二宮 -->1
     #star_a_6 = 紫微星系 -->2
     #star_a_8 = 天府星系 -->3
@@ -2938,16 +2938,14 @@ def load_data():
     loadfile = []
     loadfile.append('')
     filenames =os.listdir(os.getcwd())
-    #print(filenames)
     for f in filenames:#
         if f.split('.')[-1] == 'txt' :#f
             loadfile.append(f)#os.path.join(dirpath,f)
-    #print(loadfile)
     root_load = Tk()
     screenwidth = root_load.winfo_screenwidth()
     screenheight = root_load.winfo_screenheight()
-    w_win = 600
-    h_win = 400
+    w_win = 500
+    h_win = 200
     x_offset = (screenwidth - w_win) / 2
     y_offset = ((screenheight - h_win) / 2)
     root_load.title("選擇命主檔案")
@@ -2963,12 +2961,12 @@ def load_data():
     data_name_L.place(x = 10, y = 30)
 
     var_data_name = tk.StringVar()
-    monthcb_old = ttk.Combobox(root_load,textvariable=var_data_name, width=20, height=2, font=fontStyle)
+    monthcb_old = ttk.Combobox(root_load,textvariable=var_data_name, width=20, height=5, font=fontStyle)
     monthcb_old['values'] = loadfile
     monthcb_old.place(x = 150, y = 30)
     monthcb_old.current(0)
     enter_bt=tk.Button(root_load, font=fontStyle, text='確定', width = 4, height=1,command=root_load.quit)#,command=root_input.destroy
-    enter_bt.place(x=150,y=60)
+    enter_bt.place(x=200,y=90)
     root_load.mainloop() 
     file_data = var_data_name.get()
     root_load.destroy() 
@@ -2977,11 +2975,14 @@ if __name__ == '__main__':
     file_data = load_data()
     run_fate = 0
     #基本資料格式
-    #0:編號，1:姓名，2:男女，3:陰陽曆，4:陽年，5:陽月，6:陽日，7:陰年，8:陰月，9:陰日，10:時，11:分，12:時辰
+    #0:編號(str)，1:姓名(str)，2:男女(int)，3:陰陽曆(int)，
+    #4:陽年(int-1911)，5:陽月(int-1)，6:陽日(int-1)，
+    #7:陰年(int-1911)，8:陰月(int-1)，9:陰日(int-1)，
+    #10:時(int)，11:分(int)，12:時辰(str)
     
     sbase_data =[]
     if file_data == '' :
-        sbase_data =['0001','林昱廷',1,1,87,5,21,87,4,27,13,30,0]
+        sbase_data =['0001','林昱廷',1,1,1998,6,22,1998,5,28,13,30,'']
     else:
         with open(file_data,'r',encoding="utf-8") as f:
             for line in f.readlines():
@@ -2991,10 +2992,4 @@ if __name__ == '__main__':
         b_d=keyin_data(sbase_data)      #輸入命主的基本資料
         fate_data = main_module(b_d)    #產生排盤所需資料
         trew=fateplat_new(fate_data)    #將資料傳入排盤程式_new
-        #print(trew)
         run_fate = quit_prg()           #是否離開程式
-
-
-
-
-
