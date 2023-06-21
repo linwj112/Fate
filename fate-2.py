@@ -804,6 +804,7 @@ def fateplat_new(fate_data):    #命盤排列
     timecb.place(x = 310, y = 415)
     timecb.current(0)
     tk.Button(root, font=fontStyle_1, text='四化飛星', width=8, height=1, command=lambda:fly_4star(var_tenken.get(),star_a_6,star_a_8,time_start_1,time_start_2,month_start_1,month_start_2,'noth_4fly')).place(x=400,y=400)#fate_data
+    tk.Button(root, font=fontStyle_1, text='流月流日', width=8, height=1, command=lambda:l_month_date(fate_data)).place(x=580,y=400)#fate_data
     
     #big_limit =[大限起始歲數,男女,出生年陰陽,命宮所在位置,五行局] #fate_data[7]
     
@@ -2223,15 +2224,15 @@ def fateplat_4star_data(fate_data): #大小限流年四煞星排盤程式keyin�
 
 def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
               month_start_1,month_start_2,use_place):   #產生四化飛星資料
-    use_place   #四化飛星使用的命盤類別
-    argu_year   #本生年天干
-    star_a_6    #紫微星系
-    star_a_8    #天府星系
-    time_start_1    #文昌
-    time_start_2   #文曲    
-    month_start_1   #左輔
-    month_start_2   #右弼
-
+    #use_place   #四化飛星使用的命盤類別
+    #print('天干',argu_year)   #本生年天干
+    #star_a_6    #紫微星系
+    #star_a_8    #天府星系
+    #time_start_1    #文昌
+    #time_start_2   #文曲    
+    #month_start_1   #左輔
+    #month_start_2   #右弼
+    #print('ss',month_start_1)
     step13_1 ={'甲':'廉貞','乙':'天機','丙':'天同','丁':'太陰','戊':'貪狼','己':'武曲','庚':'太陽','辛':'巨門','壬':'天梁','癸':'破軍'}#化祿
     step13_2 ={'甲':'破軍','乙':'天梁','丙':'天機','丁':'天同','戊':'太陰','己':'貪狼','庚':'武曲','辛':'太陽','壬':'紫微','癸':'巨門'}#化權
     step13_3 ={'甲':'武曲','乙':'紫微','丙':'文昌','丁':'天機','戊':'右弼','己':'天梁','庚':'天同','辛':'文曲','壬':'左輔','癸':'太陰'}#化科
@@ -2243,6 +2244,16 @@ def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
     hwa_gi = step13_4[argu_year]
     temp_lckg = [hwa_lu,hwa_cheng,hwa_ka,hwa_gi]
     temp_lckg_text=['化祿','化權','化科','化忌']
+
+    #清除具有四化星的主星曜之化星欄位資料
+    for i in range(0,12):
+        star_a_6[i][1] = ''    #紫微星系
+        star_a_8[i][1] = ''    #天府星系
+        time_start_1[i][1] = ''    #文昌
+        time_start_2[i][1] = ''    #文曲    
+        month_start_1[i][1] = ''   #左輔
+        month_start_2[i][1] = ''   #右弼
+
     for i in range(0,4):
         try:         
             temp_tt=(star_a_6.index([temp_lckg[i],'']))
@@ -2266,7 +2277,7 @@ def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
             temp_tt=(month_start_1.index([temp_lckg[i],'']))
             del month_start_1[temp_tt]
             month_start_1.insert(temp_tt,[temp_lckg[i],temp_lckg_text[i]])        
-            #print(month_start_1)
+            #print('a',month_start_1)
         except:                           
             temp = 0
             #print(temp_lckg[i],'不在左輔內')
@@ -2297,14 +2308,499 @@ def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
         except:                           
             temp = 0
             #print(temp_lckg[i],'不在文曲內')
+
     if use_place == 'noth_4fly':    #北派四化飛星
         messagebox.showinfo('四化飛星', temp_lckg)
         #print(temp_lckg)
+    #print('b',month_start_1)    
     return(star_a_6,star_a_8,month_start_1,month_start_2,time_start_1,time_start_2,temp_lckg)
 
-def l_month_date(): #流月流日排盤
+def l_month_date(fate_data): #流月流日排盤
+    #'''
+    fate_data[0]#生年干支，月-日，生日干支，生月支，生月干，生時支，生時干
+    fate_data[2]#紫微星系
+    fate_data[3]#天府星系
+    fate_data[9]#左輔
+    fate_data[10]#右弼
+    fate_data[12]#文昌
+    fate_data[13]#文曲
+    fate_data[17]#寅首
+    #'''
+    xx=clander_cc.changecc(datetime.datetime.now())   #透過萬年曆將陽曆轉換後的生辰八字所有資料
+    #print(xx)
+    #年:xx[0],月-日:xx[1],日:xx[2],:xx[3]
+    #*-----將現在時刻八字分離出來作為排盤所需資料-----*****************************
+    f_year_a = xx[0][0] #現在年天干
+    f_year_b = xx[0][1] #現在年地支
+    chinese_month = ['正','二','三','四','五','六','七','八','九','十','冬','臘']
+    i = 0
+    for trm in chinese_month:
+        i += 1
+        if trm == xx[1][0]:
+           f_month = i  #生月
+    f_date = xx[1][-2:] #生日
+    f_time = xx[3]
 
+    tenkan = {'甲':0,'乙':1,'丙':0,'丁':1,'戊':0,'己':1,'庚':0,'辛':1,'壬':0,'癸':1}   #十天干
+    tenkan_a = {'甲':1,'乙':2,'丙':3,'丁':4,'戊':5,'己':6,'庚':7,'辛':8,'壬':9,'癸':10}   #十天干
+    tenkan_b = {1:'甲',2:'乙',3:'丙',4:'丁',5:'戊',6:'己',7:'庚',8:'辛',9:'壬',10:'癸'}   #十天干
 
+    dichi = {'子':0,'丑':1,'寅':2,'卯':3,'辰':4,'巳':5,'午':6,'未':7,'申':8,'酉':9,'戌':10,'亥':11}    #十二地支
+    dichi_b = {11:'子',12:'丑',1:'寅',2:'卯',3:'辰',4:'巳',5:'午',6:'未',7:'申',8:'酉',9:'戌',10:'亥'}    #十二地支
+
+    f_month_tenkan =tenkan_b[((tenkan_a[f_year_a])*2+f_month)%10]#現在月天干
+    f_momth_dichi = dichi_b[f_month]#現在月地支
+    xx[2] #現在日干支
+    temp_time_a =(tenkan_a[xx[2][0]])%5
+    temp_time_b =(1+dichi[f_time])%10
+
+    if temp_time_a ==1:
+        f_time_tenkan=tenkan_b[10 if temp_time_b == 0 else temp_time_b]#現在時天干
+    elif temp_time_a ==2:
+        f_time_tenkan=tenkan_b[10 if ((2+temp_time_b)%10) == 0 else ((2+temp_time_b)%10)]#現在時天干
+    elif temp_time_a ==3:
+        f_time_tenkan=tenkan_b[10 if ((4+temp_time_b)%10) == 0 else ((4+temp_time_b)%10)]#現在時天干
+    elif temp_time_a ==4:
+        f_time_tenkan=tenkan_b[10 if ((6+temp_time_b)%10) == 0 else ((6+temp_time_b)%10)]#現在時天干
+    elif temp_time_a ==0:
+        f_time_tenkan=tenkan_b[10 if ((8+temp_time_b)%10) == 0 else ((8+temp_time_b)%10)]#現在時天干
+    f_time_dichi = f_time#現在時地支
+
+    #print(f_year_a,f_year_b,'年')
+    #print(f_month_tenkan,f_momth_dichi,'月')
+    #print(xx[2][0],xx[2][1],'日')
+    #print(f_time_tenkan,f_time_dichi,'時')
+    #**********四化飛星*******************************************
+    fly_l_month = fly_4star(f_month_tenkan,fate_data[2],fate_data[3],fate_data[12],fate_data[13],fate_data[9],fate_data[10],'')
+    l_month = copy.deepcopy(fly_l_month)    #防止資料被覆蓋
+    fly_l_date = fly_4star(xx[2][0],fate_data[2],fate_data[3],fate_data[12],fate_data[13],fate_data[9],fate_data[10],'')
+    l_date = copy.deepcopy(fly_l_date)    #防止資料被覆蓋
+    #**********火鈴羊陀*******************************************
+    four_l_month = set_4star_limit(f_month_tenkan,f_momth_dichi,dichi,f_time)  #流月
+    flyt_month = copy.deepcopy(four_l_month)    #防止資料被覆蓋
+    four_l_date = set_4star_limit(xx[2][0],xx[2][1],dichi,f_time)  #流日
+    flyt_date = copy.deepcopy(four_l_date)    #防止資料被覆蓋
+
+    #'''
+    lfpbg =  '#F0F0F0'#'lightgreen'
+    #流月流日排盤四煞星排盤資料
+    root_Lmd = Tk()
+    screenwidth = root_Lmd.winfo_screenwidth()
+    screenheight = root_Lmd.winfo_screenheight()
+    w_win = 1200
+    h_win = 652
+    w_frame = 300
+    h_frame = 163
+    x_offset = (screenwidth - w_win) / 2
+    y_offset = ((screenheight - h_win) / 2)
+    root_Lmd.title("流月、流日火鈴羊陀+四化星")
+    root_Lmd.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
+    root_Lmd.resizable(False, False)
+    style = Style()
+    style.theme_use("alt")
+    l_fontStyle = tkFont.Font(family="標楷體", size=16)
+    tk.Label(root_Lmd, font=l_fontStyle,fg='red', text='今天是農曆: '+f_year_a+f_year_b+' 年 '+f_month_tenkan+f_momth_dichi+' 月 '+xx[2][0]+xx[2][1]+' 日', width=30, height=1).place(x=300,y=180)
+    tk.Label(root_Lmd, font=l_fontStyle,fg='blue', text='陽曆:'+str(datetime.date.today()), width=30, height=1).place(x=300,y=220)
+   
+    drawtray = Canvas(root_Lmd,width=1200,height=652)   #設定三方四正畫布
+    #****************** 流月流日煞忌十二宮繪製布局 ***********************
+    fm1 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm1.grid(row=3,column=2)#子
+    tk.Label(fm1,font=l_fontStyle, text=l_month[0][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm1,font=l_fontStyle, text=l_month[1][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm1,font=l_fontStyle, text=l_month[2][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm1,font=l_fontStyle, text=l_month[3][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm1,font=l_fontStyle, text=l_month[4][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm1,font=l_fontStyle, text=l_month[5][0][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm1, text=l_month[0][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm1, text=l_month[1][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm1, text=l_month[2][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm1, text=l_month[3][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm1, text=l_month[4][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm1, text=l_month[5][0][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm1, text=l_date[0][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm1, text=l_date[1][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm1, text=l_date[2][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm1, text=l_date[3][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm1, text=l_date[4][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm1, text=l_date[5][0][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm1, text=flyt_month[0][0], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm1, text=flyt_month[1][0], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm1, text= flyt_date[0][0], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm1, text= flyt_date[1][0], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm1_sm_li = tk.Label(fm1, text='', width=4, height=1).place(x=250,y=80)  #小限流年
+    fm1_local_t = tk.Label(fm1, text=fate_data[17][0], width=4, height=1,bg='yellow').place(x=250,y=105)  #宫位天干
+    fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #宫位地支
+    fm1_name = tk.Button(fm1, text='', width=6, height=1, command = lambda:line34(drawtray,'0')).place(x=180,y=120)    #流年命宮
+
+    fm2 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm2.grid(row=3,column=1)#丑
+    tk.Label(fm2,font=l_fontStyle, text=l_month[0][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm2,font=l_fontStyle, text=l_month[1][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm2,font=l_fontStyle, text=l_month[2][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm2,font=l_fontStyle, text=l_month[3][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm2,font=l_fontStyle, text=l_month[4][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm2,font=l_fontStyle, text=l_month[5][1][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm2, text=l_month[0][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm2, text=l_month[1][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm2, text=l_month[2][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm2, text=l_month[3][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm2, text=l_month[4][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm2, text=l_month[5][1][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm2, text=l_date[0][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm2, text=l_date[1][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm2, text=l_date[2][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm2, text=l_date[3][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm2, text=l_date[4][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm2, text=l_date[5][1][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm2, text=flyt_month[0][1], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm2, text=flyt_month[1][1], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm2, text= flyt_date[0][1], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm2, text= flyt_date[1][1], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm2_sm_li = tk.Label(fm2, text='', width=4, height=1).place(x=250,y=80)
+    fm2_local_t = tk.Label(fm2, text=fate_data[17][1], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm2_local = tk.Label(fm2, text='丑', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm2_name = tk.Button(fm2, text='', width=6, height=1, command = lambda:line34(drawtray,'1')).place(x=180,y=120)
+
+    fm3 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm3.grid(row=3,column=0)#寅
+    tk.Label(fm3,font=l_fontStyle, text=l_month[0][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm3,font=l_fontStyle, text=l_month[1][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm3,font=l_fontStyle, text=l_month[2][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm3,font=l_fontStyle, text=l_month[3][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm3,font=l_fontStyle, text=l_month[4][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm3,font=l_fontStyle, text=l_month[5][2][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm3, text=l_month[0][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm3, text=l_month[1][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm3, text=l_month[2][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm3, text=l_month[3][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm3, text=l_month[4][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm3, text=l_month[5][2][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm3, text=l_date[0][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm3, text=l_date[1][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm3, text=l_date[2][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm3, text=l_date[3][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm3, text=l_date[4][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm3, text=l_date[5][2][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm3, text=flyt_month[0][2], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm3, text=flyt_month[1][2], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm3, text= flyt_date[0][2], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm3, text= flyt_date[1][2], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm3_sm_li = tk.Label(fm3, text='', width=4, height=1).place(x=250,y=80)
+    fm3_local_t = tk.Label(fm3, text=fate_data[17][2], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm3_local = tk.Label(fm3, text='寅', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm3_name = tk.Button(fm3, text='', width=6, height=1, command = lambda:line34(drawtray,'2')).place(x=180,y=120)
+
+    fm4 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm4.grid(row=2,column=0)#卯
+    tk.Label(fm4,font=l_fontStyle, text=l_month[0][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm4,font=l_fontStyle, text=l_month[1][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm4,font=l_fontStyle, text=l_month[2][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm4,font=l_fontStyle, text=l_month[3][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm4,font=l_fontStyle, text=l_month[4][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm4,font=l_fontStyle, text=l_month[5][3][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm4, text=l_month[0][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm4, text=l_month[1][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm4, text=l_month[2][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm4, text=l_month[3][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm4, text=l_month[4][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm4, text=l_month[5][3][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm4, text=l_date[0][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm4, text=l_date[1][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm4, text=l_date[2][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm4, text=l_date[3][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm4, text=l_date[4][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm4, text=l_date[5][3][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm4, text=flyt_month[0][3], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm4, text=flyt_month[1][3], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm4, text= flyt_date[0][3], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm4, text= flyt_date[1][3], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm4_sm_li = tk.Label(fm4, text='', width=4, height=1).place(x=250,y=80)
+    fm4_local_t = tk.Label(fm4, text=fate_data[17][3], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm4_local = tk.Label(fm4, text='卯', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm4_name = tk.Button(fm4, text='', width=6, height=1, command = lambda:line34(drawtray,'3')).place(x=180,y=120)
+
+    fm5 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm5.grid(row=1,column=0)#辰
+    tk.Label(fm5,font=l_fontStyle, text=l_month[0][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm5,font=l_fontStyle, text=l_month[1][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm5,font=l_fontStyle, text=l_month[2][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm5,font=l_fontStyle, text=l_month[3][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm5,font=l_fontStyle, text=l_month[4][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm5,font=l_fontStyle, text=l_month[5][4][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm5, text=l_month[0][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm5, text=l_month[1][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm5, text=l_month[2][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm5, text=l_month[3][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm5, text=l_month[4][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm5, text=l_month[5][4][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm5, text=l_date[0][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm5, text=l_date[1][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm5, text=l_date[2][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm5, text=l_date[3][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm5, text=l_date[4][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm5, text=l_date[5][4][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm5, text=flyt_month[0][4], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm5, text=flyt_month[1][4], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm5, text= flyt_date[0][4], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm5, text= flyt_date[1][4], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm5_sm_li = tk.Label(fm5, text='', width=4, height=1).place(x=250,y=80)
+    fm5_local_t = tk.Label(fm5, text=fate_data[17][4], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm5_local = tk.Label(fm5, text='辰', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm5_name = tk.Button(fm5, text='', width=6, height=1, command = lambda:line34(drawtray,'4')).place(x=180,y=120)
+
+    fm6 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm6.grid(row=0,column=0)#巳
+    tk.Label(fm6,font=l_fontStyle, text=l_month[0][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm6,font=l_fontStyle, text=l_month[1][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm6,font=l_fontStyle, text=l_month[2][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm6,font=l_fontStyle, text=l_month[3][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm6,font=l_fontStyle, text=l_month[4][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm6,font=l_fontStyle, text=l_month[5][5][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm6, text=l_month[0][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm6, text=l_month[1][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm6, text=l_month[2][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm6, text=l_month[3][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm6, text=l_month[4][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm6, text=l_month[5][5][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm6, text=l_date[0][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm6, text=l_date[1][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm6, text=l_date[2][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm6, text=l_date[3][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm6, text=l_date[4][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm6, text=l_date[5][5][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm6, text=flyt_month[0][5], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm6, text=flyt_month[1][5], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm6, text= flyt_date[0][5], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm6, text= flyt_date[1][5], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm6_sm_li = tk.Label(fm6, text='', width=4, height=1).place(x=250,y=80)
+    fm6_local_t = tk.Label(fm6, text=fate_data[17][5], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm6_local = tk.Label(fm6, text='巳', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm6_name = tk.Button(fm6, text='', width=6, height=1, command = lambda:line34(drawtray,'5')).place(x=180,y=120)
+
+    fm7 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm7.grid(row=0,column=1)#午
+    tk.Label(fm7,font=l_fontStyle, text=l_month[0][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm7,font=l_fontStyle, text=l_month[1][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm7,font=l_fontStyle, text=l_month[2][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm7,font=l_fontStyle, text=l_month[3][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm7,font=l_fontStyle, text=l_month[4][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm7,font=l_fontStyle, text=l_month[5][6][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm7, text=l_month[0][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm7, text=l_month[1][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm7, text=l_month[2][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm7, text=l_month[3][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm7, text=l_month[4][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm7, text=l_month[5][6][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm7, text=l_date[0][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm7, text=l_date[1][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm7, text=l_date[2][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm7, text=l_date[3][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm7, text=l_date[4][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm7, text=l_date[5][6][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm7, text=flyt_month[0][6], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm7, text=flyt_month[1][6], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm7, text= flyt_date[0][6], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm7, text= flyt_date[1][6], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm7_sm_li = tk.Label(fm7, text='', width=4, height=1).place(x=250,y=80)
+    fm7_local_t = tk.Label(fm7, text=fate_data[17][6], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm7_local = tk.Label(fm7, text='午', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm7_name = tk.Button(fm7, text='', width=6, height=1, command = lambda:line34(drawtray,'6')).place(x=180,y=120)
+
+    fm8 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm8.grid(row=0,column=2)#未
+    tk.Label(fm8,font=l_fontStyle, text=l_month[0][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm8,font=l_fontStyle, text=l_month[1][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm8,font=l_fontStyle, text=l_month[2][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm8,font=l_fontStyle, text=l_month[3][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm8,font=l_fontStyle, text=l_month[4][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm8,font=l_fontStyle, text=l_month[5][7][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm8, text=l_month[0][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm8, text=l_month[1][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm8, text=l_month[2][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm8, text=l_month[3][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm8, text=l_month[4][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm8, text=l_month[5][7][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm8, text=l_date[0][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm8, text=l_date[1][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm8, text=l_date[2][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm8, text=l_date[3][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm8, text=l_date[4][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm8, text=l_date[5][7][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm8, text=flyt_month[0][7], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm8, text=flyt_month[1][7], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm8, text= flyt_date[0][7], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm8, text= flyt_date[1][7], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm8_sm_li = tk.Label(fm8, text='', width=4, height=1).place(x=250,y=80)
+    fm8_local_t = tk.Label(fm8, text=fate_data[17][7], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm8_local = tk.Label(fm8, text='未', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm8_name = tk.Button(fm8, text='', width=6, height=1, command = lambda:line34(drawtray,'7')).place(x=180,y=120)
+
+    fm9 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm9.grid(row=0,column=3)#申
+    tk.Label(fm9,font=l_fontStyle, text=l_month[0][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm9,font=l_fontStyle, text=l_month[1][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm9,font=l_fontStyle, text=l_month[2][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm9,font=l_fontStyle, text=l_month[3][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm9,font=l_fontStyle, text=l_month[4][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm9,font=l_fontStyle, text=l_month[5][8][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm9, text=l_month[0][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm9, text=l_month[1][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm9, text=l_month[2][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm9, text=l_month[3][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm9, text=l_month[4][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm9, text=l_month[5][8][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm9, text=l_date[0][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm9, text=l_date[1][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm9, text=l_date[2][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm9, text=l_date[3][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm9, text=l_date[4][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm9, text=l_date[5][8][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm9, text=flyt_month[0][8], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm9, text=flyt_month[1][8], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm9, text= flyt_date[0][8], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm9, text= flyt_date[1][8], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm9_sm_li = tk.Label(fm9, text='', width=4, height=1).place(x=250,y=80)
+    fm9_local_t = tk.Label(fm9, text=fate_data[17][8], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm9_local = tk.Label(fm9, text='申', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm9_name = tk.Button(fm9, text='', width=6, height=1, command = lambda:line34(drawtray,'8')).place(x=180,y=120)
+
+    fm10 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm10.grid(row=1,column=3)#酉
+    tk.Label(fm10,font=l_fontStyle, text=l_month[0][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm10,font=l_fontStyle, text=l_month[1][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm10,font=l_fontStyle, text=l_month[2][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm10,font=l_fontStyle, text=l_month[3][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm10,font=l_fontStyle, text=l_month[4][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm10,font=l_fontStyle, text=l_month[5][9][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm10, text=l_month[0][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm10, text=l_month[1][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm10, text=l_month[2][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm10, text=l_month[3][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm10, text=l_month[4][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm10, text=l_month[5][9][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm10, text=l_date[0][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm10, text=l_date[1][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm10, text=l_date[2][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm10, text=l_date[3][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm10, text=l_date[4][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm10, text=l_date[5][9][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm10, text=flyt_month[0][9], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm10, text=flyt_month[1][9], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm10, text= flyt_date[0][9], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm10, text= flyt_date[1][9], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm10_sm_li = tk.Label(fm10, text='', width=4, height=1).place(x=250,y=80)
+    fm10_local_t = tk.Label(fm10, text=fate_data[17][9], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm10_local = tk.Label(fm10, text='酉', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm10_name = tk.Button(fm10, text='', width=6, height=1, command = lambda:line34(drawtray,'9')).place(x=180,y=120)
+
+    fm11 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm11.grid(row=2,column=3)#戌
+    tk.Label(fm11,font=l_fontStyle, text=l_month[0][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm11,font=l_fontStyle, text=l_month[1][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm11,font=l_fontStyle, text=l_month[2][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm11,font=l_fontStyle, text=l_month[3][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm11,font=l_fontStyle, text=l_month[4][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm11,font=l_fontStyle, text=l_month[5][10][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm11, text=l_month[0][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm11, text=l_month[1][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm11, text=l_month[2][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm11, text=l_month[3][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm11, text=l_month[4][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm11, text=l_month[5][10][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm11, text=l_date[0][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm11, text=l_date[1][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm11, text=l_date[2][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm11, text=l_date[3][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm11, text=l_date[4][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm11, text=l_date[5][10][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm11, text=flyt_month[0][10], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm11, text=flyt_month[1][10], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm11, text= flyt_date[0][10], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm11, text= flyt_date[1][10], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm11_sm_li = tk.Label(fm11, text='', width=4, height=1).place(x=250,y=80)
+    fm11_local_t = tk.Label(fm11, text=fate_data[17][10], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm11_local = tk.Label(fm11, text='戌', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm11_name = tk.Button(fm11, text='', width=6, height=1, command = lambda:line34(drawtray,'10')).place(x=180,y=120)
+
+    fm12 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
+    fm12.grid(row=3,column=3)#亥
+    tk.Label(fm12,font=l_fontStyle, text=l_month[0][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=0)#流月紫微星系
+    tk.Label(fm12,font=l_fontStyle, text=l_month[1][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=25)#流月天府星系
+    tk.Label(fm12,font=l_fontStyle, text=l_month[2][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=50)#流月左輔
+    tk.Label(fm12,font=l_fontStyle, text=l_month[3][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=75)#流月右弼
+    tk.Label(fm12,font=l_fontStyle, text=l_month[4][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=100)#流月文昌
+    tk.Label(fm12,font=l_fontStyle, text=l_month[5][11][0], width=5, height=1,bg=lfpbg).place(x=0,y=125)#流月文曲
+
+    tk.Label(fm12, text=l_month[0][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=0)#流月紫微星系四化
+    tk.Label(fm12, text=l_month[1][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=25)#流月天府星系四化
+    tk.Label(fm12, text=l_month[2][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=50)#流月左輔四化
+    tk.Label(fm12, text=l_month[3][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=75)#流月右弼四化
+    tk.Label(fm12, text=l_month[4][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=100)#流月文昌四化
+    tk.Label(fm12, text=l_month[5][11][1], width=3, height=1,bg=lfpbg).place(x=60,y=125)#流月文曲四化
+
+    tk.Label(fm12, text=l_date[0][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=0)#流日紫微星系四化
+    tk.Label(fm12, text=l_date[1][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=25)#流日天府星系四化
+    tk.Label(fm12, text=l_date[2][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=50)#流日左輔四化
+    tk.Label(fm12, text=l_date[3][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=75)#流日右弼四化
+    tk.Label(fm12, text=l_date[4][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=100)#流日文昌四化
+    tk.Label(fm12, text=l_date[5][11][1], width=3, height=1,bg=lfpbg).place(x=95,y=125)#流日文曲四化
+
+    tk.Label(fm12, text=flyt_month[0][11], width=3, height=1,bg=lfpbg).place(x=180,y=0)#流月火鈴
+    tk.Label(fm12, text=flyt_month[1][11], width=3, height=1,bg=lfpbg).place(x=180,y=30)#流月羊陀
+    tk.Label(fm12, text= flyt_date[0][11], width=3, height=1,bg=lfpbg).place(x=220,y=0)#流日火鈴
+    tk.Label(fm12, text= flyt_date[1][11], width=3, height=1,bg=lfpbg).place(x=220,y=30)#流日羊陀
+
+    fm12_sm_li = tk.Label(fm12, text='', width=4, height=1).place(x=250,y=80)
+    fm12_local_t = tk.Label(fm12, text=fate_data[17][11], width=4, height=1,bg='yellow').place(x=250,y=105)
+    fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
+    fm12_name = tk.Button(fm12, text='', width=6, height=1, command = lambda:line34(drawtray,'11')).place(x=180,y=120)
+    root_Lmd.mainloop()
+    #'''
     return
 
 def data_save(save_data):   #儲存命主資料
@@ -2368,7 +2864,7 @@ def main_module(b_d):   #產生排盤資料
     temp_time_a =(tenkan_a[xx[2][0]])%5
     temp_time_b =(1+dichi[f_time])%10
     if temp_time_a ==1:
-        f_time_tenkan=tenkan_b[temp_time_b]#本時天干
+        f_time_tenkan=tenkan_b[10 if temp_time_b == 0 else temp_time_b]#本時天干
     elif temp_time_a ==2:
         f_time_tenkan=tenkan_b[10 if ((2+temp_time_b)%10) == 0 else ((2+temp_time_b)%10)]#本時天干
     elif temp_time_a ==3:
