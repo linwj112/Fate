@@ -574,6 +574,11 @@ def aboutme():  #顯示關於本程式
     text.insert(END,"命盤解析採用大耕老師的說明。\n")
     text.insert(END,"\n")
     text.insert(END,"庚年的四化星也是採用大耕老師的用法。\n")
+    text.insert(END,"\n")
+    text.insert(END,"解盤方式請參考---'基本解盤'---的說明。\n")
+    text.insert(END,"\n")
+    text.insert(END,"有關於身體健康的評斷請自行依據中醫理論解讀。\n")
+
 
     enter_bt=tk.Button(root_about, font=fontStyle, text='確定', width = 4, height=1,command=root_about.destroy)#root_about.quit
     enter_bt.place(x=350,y=250)
@@ -645,6 +650,73 @@ def line34(drawtray,location_kk):
         canvas.create_line(300,408,750,163)
         canvas.create_line(900,489,750,163)
         canvas.create_line(300,408,900,489)
+    return
+
+def fate_explain_base():
+    root_explain_sop = Tk()
+    screenwidth = root_explain_sop.winfo_screenwidth()
+    screenheight = root_explain_sop.winfo_screenheight()
+    w_win = 800
+    h_win = 300
+    x_offset = (screenwidth - w_win) / 2
+    y_offset = ((screenheight - h_win) / 2)
+    root_explain_sop.title("基本解盤SOP")
+    root_explain_sop.geometry("%dx%d+%d-%d" %(w_win,h_win,x_offset,y_offset))
+
+    style = Style()
+    style.theme_use("alt")
+    fontStyle = tkFont.Font(family="標楷體", size=20)#Keiu 16
+    #*********************** 基本資料 ****************************
+    text= tk.Text(root_explain_sop,height=12)
+    text.configure(font=fontStyle)
+    text.pack(fill=BOTH,padx=5)#,expand=True,pady=10
+    text.insert(END,"Step 1\n")
+    text.insert(END,"單主星\n")
+    text.insert(END,"星曜需要對應宮位才能做出正確的解讀，而且星曜需依照其化氣(核心價值)，\n")
+    text.insert(END,"去對應宮位的含義，不能單獨說明貪狼是什麼，巨門是什麼。\n")
+    text.insert(END,"雙主星\n")
+    text.insert(END,"雙主星以正主星為主，副星可分為：幫助輔佐型、穩定控制型、相輔相成型。\n")
+    text.insert(END,"幫助輔佐型：七殺、破軍、貪狼、天相。\n")
+    text.insert(END,"穩定控制型：天府、天梁、太陽、太陰、巨門。\n")
+    text.insert(END,"相輔相成型：這種組通常是星曜個性特質差不多的，例如太陽太陰。\n")
+    text.insert(END,"Step 2\n")
+    text.insert(END,"找出運限祿羊陀。\n")
+    text.insert(END,"Step 3\n")
+    text.insert(END,"對宮及三方----三方四正。\n")
+    text.insert(END,"綜合果汁解盤法\n")
+    text.insert(END,"Step 4\n")
+    text.insert(END,"基本解盤SOP:\n")
+    text.insert(END,"1.有格論格，無格論財官。\n")
+    text.insert(END,"2.身宮所在的位置---一生重視跟追求的價值。\n")
+    text.insert(END,"3.化忌所在的位置---有空缺的地方。\n")
+    text.insert(END,"4.陀羅所在的位置---擺脫不掉的情緒\n")
+    text.insert(END,"5.十二宮最差的宮位---三方四正組合起來忌煞最多的宮位\n")
+    text.insert(END,"6.大限命宮所在的位置---每十年一個階段，各自追求的生命價值。\n")
+    text.insert(END,"7.大限命盤的分析---在這個大限中，除了在乎的事情外，基本的能力\n")
+    text.insert(END," 跟個性如何也很重要--'格局及財官'，還有內心的空缺--'化忌的位置'、\n")
+    text.insert(END," 擺脫不掉的事情--'陀羅的位置'，這就構成這十年的基本結構，\n")
+    text.insert(END," 以及他這十年的路途上會遇到什麼。\n")
+    text.insert(END,"8.流年命宮所在的位置---同大限的解盤方式，就可以知道這一年主要的情況如何。\n")
+    text.insert(END,"Step 5\n")
+    text.insert(END,"暗合宮\n")
+    text.insert(END,"命盤上隱藏的陷阱跟寶藏\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"Step 6\n")
+    text.insert(END,"將事件現象，去對應命盤上的跡象。\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+    text.insert(END,"\n")
+
+    enter_bt=tk.Button(root_explain_sop, font=fontStyle, text='確定', width = 4, height=1,command=root_explain_sop.destroy)
+    enter_bt.place(x=350,y=250)
+    root_explain_sop.mainloop()
     return
 
 def fateplat_new(fate_data):    #命盤排列
@@ -754,6 +826,7 @@ def fateplat_new(fate_data):    #命盤排列
     menubar.add_cascade(label="Help",menu=helpmenu)
     #About功能表內建立功能表清單    
     helpmenu.add_command(label="健康",command=health)#
+    helpmenu.add_command(label="基本解盤",command=fate_explain_base)#
 
     helpmenu.add_command(label="關於",command=aboutme)#
     root.config(menu=menubar)
@@ -785,11 +858,11 @@ def fateplat_new(fate_data):    #命盤排列
     else:
         temp_p_m = '陰'        
     #tk.Label(root, text=str(s_y)+' ~ '+str((s_y+10-1)),font=fontStyle, width=8, height=1,bg='yellow').place(x=400,y=340)
-    tk.Label(root, text=temp_p_m+temp_b_g,font=fontStyle, width=8, height=1,bg='yellow').place(x=400,y=350)
-    tk.Label(root, text=fate_data[16],font=fontStyle_1, width=20, height=1).place(x=445,y=310)
-    tk.Label(root, text=fate_data[7][4],font=fontStyle_1, width=20, height=1).place(x=445,y=250)
-    tk.Label(root, text='身宮 : '+fate_data[18],font=fontStyle_1, width=10, height=1).place(x=520,y=340)
-    tk.Button(root, font=fontStyle_1, text='流年四煞', width=8, height=1, command=lambda:fateplat_4star_data(fate_data)).place(x=750,y=400)#fate_data
+    tk.Label(root, text=fate_data[7][4],font=fontStyle_1, width=20, height=1).place(x=445,y=220)    #五行局
+    tk.Label(root, text=fate_data[16],font=fontStyle_1, width=20, height=1).place(x=445,y=280)  #名字
+    tk.Label(root, text=temp_p_m+temp_b_g,font=fontStyle, width=8, height=1,bg='yellow').place(x=400,y=320) #陽男女
+    tk.Label(root, text='身宮 : '+fate_data[18],font=fontStyle_1, width=10, height=1).place(x=520,y=310)    #身宮
+    tk.Button(root, font=fontStyle_1, text='流年四煞', width=8, height=1, command=lambda:fateplat_4star_data(fate_data)).place(x=750,y=400)#流年四煞
 
     star_a_6 = fate_data[2]    #紫微星系
     star_a_8 = fate_data[3]    #天府星系
@@ -799,12 +872,15 @@ def fateplat_new(fate_data):    #命盤排列
     month_start_2 = fate_data[10]   #右弼
 
     var_tenken = tk.StringVar()
-    timecb = ttk.Combobox(root,textvariable=var_tenken, width=4, height=2, font=fontStyle_1)
+    timecb = ttk.Combobox(root,textvariable=var_tenken, width=3, height=5, font=fontStyle_1)
     timecb['values'] = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸']
     timecb.place(x = 310, y = 415)
     timecb.current(0)
-    tk.Button(root, font=fontStyle_1, text='四化飛星', width=8, height=1, command=lambda:fly_4star(var_tenken.get(),star_a_6,star_a_8,time_start_1,time_start_2,month_start_1,month_start_2,'noth_4fly')).place(x=400,y=400)#fate_data
-    tk.Button(root, font=fontStyle_1, text='流月流日', width=8, height=1, command=lambda:l_month_date(fate_data)).place(x=580,y=400)#fate_data
+    tk.Button(root, font=fontStyle_1, text='四化飛星', width=8, height=1, command=lambda:fly_4star(var_tenken.get(),star_a_6,star_a_8,time_start_1,time_start_2,month_start_1,month_start_2,'noth_4fly')).place(x=380,y=400)#fate_data
+    l_add_date = Entry(root, font=fontStyle_1, width=3)
+    l_add_date.place(x=540,y=405)
+    l_add_date.insert(0,0)#內定增加日期，0即是當日
+    tk.Button(root, font=fontStyle_1, text='流月流日', width=8, command=lambda:l_month_date(fate_data,int(l_add_date.get()))).place(x=590,y=400)#fate_data
     
     #big_limit =[大限起始歲數,男女,出生年陰陽,命宮所在位置,五行局] #fate_data[7]
     
@@ -2315,9 +2391,10 @@ def fly_4star(argu_year,star_a_6,star_a_8,time_start_1,time_start_2,
     #print('b',month_start_1)    
     return(star_a_6,star_a_8,month_start_1,month_start_2,time_start_1,time_start_2,temp_lckg)
 
-def l_month_date(fate_data): #流月流日排盤
+def l_month_date(fate_data,l_date_add): #流月流日排盤
     #'''
     fate_data[0]#生年干支，月-日，生日干支，生月支，生月干，生時支，生時干
+    #print(fate_data[1])#本命盤十二宮順序(子 ~ 亥)
     fate_data[2]#紫微星系
     fate_data[3]#天府星系
     fate_data[9]#左輔
@@ -2326,7 +2403,7 @@ def l_month_date(fate_data): #流月流日排盤
     fate_data[13]#文曲
     fate_data[17]#寅首
     #'''
-    xx=clander_cc.changecc(datetime.datetime.now())   #透過萬年曆將陽曆轉換後的生辰八字所有資料
+    xx=clander_cc.changecc(datetime.datetime.now()+ datetime.timedelta(days=l_date_add))   #透過萬年曆將流月陽曆轉換後的生辰八字所有資料
     #print(xx)
     #年:xx[0],月-日:xx[1],日:xx[2],:xx[3]
     #*-----將現在時刻八字分離出來作為排盤所需資料-----*****************************
@@ -2340,17 +2417,28 @@ def l_month_date(fate_data): #流月流日排盤
            f_month = i  #生月
     f_date = xx[1][-2:] #生日
     f_time = xx[3]
-
+    place_step ={'命宮':0,'父母宮':1,'福德宮':2,'田宅宮':3,'官祿宮':4,'僕役宮':5,'遷移宮':6,'疾厄宮':7,'財帛宮':8,'子女宮':9,'夫妻宮':10,'兄弟宮':11}
     tenkan = {'甲':0,'乙':1,'丙':0,'丁':1,'戊':0,'己':1,'庚':0,'辛':1,'壬':0,'癸':1}   #十天干
     tenkan_a = {'甲':1,'乙':2,'丙':3,'丁':4,'戊':5,'己':6,'庚':7,'辛':8,'壬':9,'癸':10}   #十天干
     tenkan_b = {1:'甲',2:'乙',3:'丙',4:'丁',5:'戊',6:'己',7:'庚',8:'辛',9:'壬',10:'癸'}   #十天干
 
     dichi = {'子':0,'丑':1,'寅':2,'卯':3,'辰':4,'巳':5,'午':6,'未':7,'申':8,'酉':9,'戌':10,'亥':11}    #十二地支
     dichi_b = {11:'子',12:'丑',1:'寅',2:'卯',3:'辰',4:'巳',5:'午',6:'未',7:'申',8:'酉',9:'戌',10:'亥'}    #十二地支
+    #*****起流月命宮*****
+    l_mk = []
+    l_mk_temp = (place_step[fate_data[1][2]]+dichi[f_year_b])%12
+    for i in range(0,12):
+        if i == l_mk_temp :
+            l_mk.append('流月命宮')
+        else:
+            l_mk.append('')
+    #*****起流月命宮 End*****
+
 
     f_month_tenkan =tenkan_b[((tenkan_a[f_year_a])*2+f_month)%10]#現在月天干
     f_momth_dichi = dichi_b[f_month]#現在月地支
     xx[2] #現在日干支
+
     temp_time_a =(tenkan_a[xx[2][0]])%5
     temp_time_b =(1+dichi[f_time])%10
 
@@ -2399,8 +2487,8 @@ def l_month_date(fate_data): #流月流日排盤
     style = Style()
     style.theme_use("alt")
     l_fontStyle = tkFont.Font(family="標楷體", size=16)
-    tk.Label(root_Lmd, font=l_fontStyle,fg='red', text='今天是農曆: '+f_year_a+f_year_b+' 年 '+f_month_tenkan+f_momth_dichi+' 月 '+xx[2][0]+xx[2][1]+' 日', width=30, height=1).place(x=300,y=180)
-    tk.Label(root_Lmd, font=l_fontStyle,fg='blue', text='陽曆:'+str(datetime.date.today()), width=30, height=1).place(x=300,y=220)
+    tk.Label(root_Lmd, font=l_fontStyle,fg='red', text='流月流日農曆: '+f_year_a+f_year_b+' 年 '+f_month_tenkan+f_momth_dichi+' 月 '+xx[2][0]+xx[2][1]+' 日', width=30, height=1).place(x=300,y=180)
+    tk.Label(root_Lmd, font=l_fontStyle,fg='blue', text='今天陽曆是:'+str(datetime.date.today()), width=30, height=1).place(x=300,y=220)
    
     drawtray = Canvas(root_Lmd,width=1200,height=652)   #設定三方四正畫布
     #****************** 流月流日煞忌十二宮繪製布局 ***********************
@@ -2435,7 +2523,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm1_sm_li = tk.Label(fm1, text='', width=4, height=1).place(x=250,y=80)  #小限流年
     fm1_local_t = tk.Label(fm1, text=fate_data[17][0], width=4, height=1,bg='yellow').place(x=250,y=105)  #宫位天干
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #宫位地支
-    fm1_name = tk.Button(fm1, text='', width=6, height=1, command = lambda:line34(drawtray,'0')).place(x=180,y=120)    #流年命宮
+    fm1_name = tk.Button(fm1, text=l_mk[0], width=6, height=1, command = lambda:line34(drawtray,'0')).place(x=180,y=120)    #流年命宮
 
     fm2 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm2.grid(row=3,column=1)#丑
@@ -2468,7 +2556,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm2_sm_li = tk.Label(fm2, text='', width=4, height=1).place(x=250,y=80)
     fm2_local_t = tk.Label(fm2, text=fate_data[17][1], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm2_local = tk.Label(fm2, text='丑', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm2_name = tk.Button(fm2, text='', width=6, height=1, command = lambda:line34(drawtray,'1')).place(x=180,y=120)
+    fm2_name = tk.Button(fm2, text=l_mk[1], width=6, height=1, command = lambda:line34(drawtray,'1')).place(x=180,y=120)
 
     fm3 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm3.grid(row=3,column=0)#寅
@@ -2501,7 +2589,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm3_sm_li = tk.Label(fm3, text='', width=4, height=1).place(x=250,y=80)
     fm3_local_t = tk.Label(fm3, text=fate_data[17][2], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm3_local = tk.Label(fm3, text='寅', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm3_name = tk.Button(fm3, text='', width=6, height=1, command = lambda:line34(drawtray,'2')).place(x=180,y=120)
+    fm3_name = tk.Button(fm3, text=l_mk[2], width=6, height=1, command = lambda:line34(drawtray,'2')).place(x=180,y=120)
 
     fm4 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm4.grid(row=2,column=0)#卯
@@ -2534,7 +2622,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm4_sm_li = tk.Label(fm4, text='', width=4, height=1).place(x=250,y=80)
     fm4_local_t = tk.Label(fm4, text=fate_data[17][3], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm4_local = tk.Label(fm4, text='卯', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm4_name = tk.Button(fm4, text='', width=6, height=1, command = lambda:line34(drawtray,'3')).place(x=180,y=120)
+    fm4_name = tk.Button(fm4, text=l_mk[3], width=6, height=1, command = lambda:line34(drawtray,'3')).place(x=180,y=120)
 
     fm5 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm5.grid(row=1,column=0)#辰
@@ -2567,7 +2655,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm5_sm_li = tk.Label(fm5, text='', width=4, height=1).place(x=250,y=80)
     fm5_local_t = tk.Label(fm5, text=fate_data[17][4], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm5_local = tk.Label(fm5, text='辰', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm5_name = tk.Button(fm5, text='', width=6, height=1, command = lambda:line34(drawtray,'4')).place(x=180,y=120)
+    fm5_name = tk.Button(fm5, text=l_mk[4], width=6, height=1, command = lambda:line34(drawtray,'4')).place(x=180,y=120)
 
     fm6 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm6.grid(row=0,column=0)#巳
@@ -2600,7 +2688,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm6_sm_li = tk.Label(fm6, text='', width=4, height=1).place(x=250,y=80)
     fm6_local_t = tk.Label(fm6, text=fate_data[17][5], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm6_local = tk.Label(fm6, text='巳', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm6_name = tk.Button(fm6, text='', width=6, height=1, command = lambda:line34(drawtray,'5')).place(x=180,y=120)
+    fm6_name = tk.Button(fm6, text=l_mk[5], width=6, height=1, command = lambda:line34(drawtray,'5')).place(x=180,y=120)
 
     fm7 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm7.grid(row=0,column=1)#午
@@ -2633,7 +2721,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm7_sm_li = tk.Label(fm7, text='', width=4, height=1).place(x=250,y=80)
     fm7_local_t = tk.Label(fm7, text=fate_data[17][6], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm7_local = tk.Label(fm7, text='午', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm7_name = tk.Button(fm7, text='', width=6, height=1, command = lambda:line34(drawtray,'6')).place(x=180,y=120)
+    fm7_name = tk.Button(fm7, text=l_mk[6], width=6, height=1, command = lambda:line34(drawtray,'6')).place(x=180,y=120)
 
     fm8 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm8.grid(row=0,column=2)#未
@@ -2666,7 +2754,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm8_sm_li = tk.Label(fm8, text='', width=4, height=1).place(x=250,y=80)
     fm8_local_t = tk.Label(fm8, text=fate_data[17][7], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm8_local = tk.Label(fm8, text='未', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm8_name = tk.Button(fm8, text='', width=6, height=1, command = lambda:line34(drawtray,'7')).place(x=180,y=120)
+    fm8_name = tk.Button(fm8, text=l_mk[7], width=6, height=1, command = lambda:line34(drawtray,'7')).place(x=180,y=120)
 
     fm9 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm9.grid(row=0,column=3)#申
@@ -2699,7 +2787,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm9_sm_li = tk.Label(fm9, text='', width=4, height=1).place(x=250,y=80)
     fm9_local_t = tk.Label(fm9, text=fate_data[17][8], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm9_local = tk.Label(fm9, text='申', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm9_name = tk.Button(fm9, text='', width=6, height=1, command = lambda:line34(drawtray,'8')).place(x=180,y=120)
+    fm9_name = tk.Button(fm9, text=l_mk[8], width=6, height=1, command = lambda:line34(drawtray,'8')).place(x=180,y=120)
 
     fm10 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm10.grid(row=1,column=3)#酉
@@ -2732,7 +2820,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm10_sm_li = tk.Label(fm10, text='', width=4, height=1).place(x=250,y=80)
     fm10_local_t = tk.Label(fm10, text=fate_data[17][9], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm10_local = tk.Label(fm10, text='酉', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm10_name = tk.Button(fm10, text='', width=6, height=1, command = lambda:line34(drawtray,'9')).place(x=180,y=120)
+    fm10_name = tk.Button(fm10, text=l_mk[9], width=6, height=1, command = lambda:line34(drawtray,'9')).place(x=180,y=120)
 
     fm11 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm11.grid(row=2,column=3)#戌
@@ -2765,7 +2853,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm11_sm_li = tk.Label(fm11, text='', width=4, height=1).place(x=250,y=80)
     fm11_local_t = tk.Label(fm11, text=fate_data[17][10], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm11_local = tk.Label(fm11, text='戌', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm11_name = tk.Button(fm11, text='', width=6, height=1, command = lambda:line34(drawtray,'10')).place(x=180,y=120)
+    fm11_name = tk.Button(fm11, text=l_mk[10], width=6, height=1, command = lambda:line34(drawtray,'10')).place(x=180,y=120)
 
     fm12 =LabelFrame(root_Lmd,width=w_frame,height=h_frame,relief="groove")
     fm12.grid(row=3,column=3)#亥
@@ -2798,7 +2886,7 @@ def l_month_date(fate_data): #流月流日排盤
     fm12_sm_li = tk.Label(fm12, text='', width=4, height=1).place(x=250,y=80)
     fm12_local_t = tk.Label(fm12, text=fate_data[17][11], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
-    fm12_name = tk.Button(fm12, text='', width=6, height=1, command = lambda:line34(drawtray,'11')).place(x=180,y=120)
+    fm12_name = tk.Button(fm12, text=l_mk[11], width=6, height=1, command = lambda:line34(drawtray,'11')).place(x=180,y=120)
     root_Lmd.mainloop()
     #'''
     return
@@ -2808,6 +2896,13 @@ def data_save(save_data):   #儲存命主資料
         for i in save_data:
             output.write(str(i))
             output.write('\n')
+
+    with open('config.ini','r') as inputf:
+        indata = inputf.read()
+        
+    if int(save_data[0]) > int(indata):
+        with open('config.ini','w') as outputf:
+            outputf.write(save_data[0])
 
     return
 
@@ -3467,6 +3562,7 @@ def load_data():
     file_data = var_data_name.get()
     root_load.destroy() 
     return(file_data)
+
 if __name__ == '__main__':
     file_data = load_data()
     run_fate = 0
@@ -3478,7 +3574,10 @@ if __name__ == '__main__':
     
     sbase_data =[]
     if file_data == '' :
-        sbase_data =['0001','林昱廷',1,1,1998,6,22,1998,5,28,13,30,'']
+        with open('config.ini') as inputf:
+            indata = inputf.read()
+
+        sbase_data =[str(int(indata)+1),'xyz',1,1,1998,6,22,1998,5,28,13,30,'']
     else:
         with open(file_data,'r',encoding="utf-8") as f:
             for line in f.readlines():
