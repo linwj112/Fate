@@ -53,20 +53,439 @@ def show_result(result_data,f_number):   #顯示宮位主星說明
     #month_start_3  #天刑、天馬 -->23
     #date_start_1   #三台 -->24
     #date_start_2   #八座 -->25
-    explain_star={'紫微':"紫微星要說明",
-                  '天機':"天機星要說明",
-                  '太陽':"太陽星要說明",
-                  '武曲':"武曲星要說明",
-                  '天同':"天同星要說明",
-                  '廉貞':"廉貞星要說明",
-                  '天府':"天府星要說明",
-                  '太陰':"太陰星要說明",
-                  '貪狼':"貪狼星要說明",
-                  '巨門':"巨門星要說明",
-                  '天相':"天相星要說明",
-                  '天梁':"天梁星要說明",
-                  '七殺':"七殺星要說明",
-                  '破軍':"破軍星要說明",
+    #命宮
+    explain_star_1={'紫微':"有皇帝心不一定有皇帝命",
+                  '天機':"善良而多變，邏輯理性與不安並行",
+                  '太陽':"一切按照我的規則走，至高無上的星曜",
+                  '武曲':"剛毅耿直，一步一腳印說一不二的正財星",
+                  '天同':"純真浪漫用愛與包容行走天下",
+                  '廉貞':"囚禁的心更展現奔放的魅力",
+                  '天府':"坐擁地盤，務實而大度的王爺",
+                  '太陰':"美麗優雅但是讓人不敢造次的媽媽",
+                  '貪狼':"慾望之星",
+                  '巨門':"黑暗中善良的火把",
+                  '天相':"制度的協調與守護者",
+                  '天梁':"人生守護神，上天給予的庇祐",
+                  '七殺':"堅持信念絕不放棄的勇者",
+                  '破軍':"打破枷鎖的偉大夢想家",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #兄弟宮
+    explain_star_2={'紫微':"皇帝般尊貴的親戚，可惜他貴我只好跪",
+                  '天機':"身邊永遠的智多星",
+                  '太陽':"長兄如父，就算是妹妹也一樣如父",
+                  '武曲':"重義氣的好兄弟",
+                  '天同':"單純樂觀不跟你爭家產的好兄弟",
+                  '廉貞':"最愛的人傷我最深",
+                  '天府':"豪邁穩重的王爺是我兄弟",
+                  '太陰':"長姐如母，弟弟一樣像媽媽",
+                  '貪狼':"感情愈多愈好、喜歡與兄弟姊妹開創人生",
+                  '巨門':"空虛寂寞覺得冷 總是希望兄弟給予溫暖",
+                  '天相':"親兄弟明算帳 感情建立在理智上",
+                  '天梁':"老天給與的大哥",
+                  '七殺':"情和義比金堅的兄弟宮",
+                  '破軍':"永遠無法猜透的兄弟姊妹",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #夫妻宮
+    explain_star_3={'紫微':"究竟是皇帝大還是皇后大",
+                  '天機':"善良而善變的感情 為了你好，我要離開你",
+                  '太陽':"男的娶某大姊，女的嫁老公如我父",
+                  '武曲':"女人最愛收到的一種花：隨便花",
+                  '天同':"善良無邪水汪汪",
+                  '廉貞':"魅力十足理性與感性兼備",
+                  '天府':"看來大方但是不願退讓",
+                  '太陰':"母親像月亮，老婆像月娘",
+                  '貪狼':"感情的慾望是人生的方向，對異性的魅力無法擋",
+                  '巨門':"愛在心裡口難開",
+                  '天相':"理性是浪漫的實踐基礎",
+                  '天梁':"天生感情成熟 善於體貼照顧人",
+                  '七殺':"感情上的殺手，但是殺自己比較多",
+                  '破軍':"如果浪漫是感情的必需品，一時的璀璨才是真正的永恆",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #子女宮
+    explain_star_4={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #財帛宮
+    explain_star_5={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #疾厄宮
+    explain_star_6={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #遷移宮
+    explain_star_7={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #僕役宮
+    explain_star_8={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #官祿宮
+    explain_star_9={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #田宅宮
+    explain_star_10={'紫微':"",
+                  '天機':"asd",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"asd",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #福德宮
+    explain_star_11={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
+                  '文昌':"文昌星要說明",
+                  '文曲':"文曲星要說明",
+                  '左輔':"左輔星要說明",
+                  '右弼':"右弼星要說明",
+                  '火星':"火星星要說明",
+                  '鈴星':"鈴星星要說明",
+                  '祿存':"祿存星要說明",
+                  '擎羊':"擎羊--這是源自於古代塞外胡人蠻族的羊角刀，象徵著巨大的衝動與破壞力，表示斬斷的力量，但是也表示了很強大的堅持力量，不動搖、往前衝的固執個性。",
+                  '陀羅':"陀羅--這是源自於佛教，永遠無法擺脫的業力糾纏，就如同陀螺般一直旋轉，是內心不願意放棄的糾結，也可以是堅持下去原地不動的力量，也有鑽研的意思。",
+                  '化祿':"化祿說明",
+                  '化權':"化權說明",
+                  '化科':"化科說明",
+                  '化忌':"化忌--忌就是自己的內心，而忌所在的宮位，就可能是我們自己內心空缺的地方。因為空缺，自然就希望去彌補或追求他。但是，人往往因為空虛而做錯事情，因此有忌在的宮位，表示會有許多問題和紛爭，其實就是自己的內心，在那個部分有空缺，而難以理性地做出好的判斷與決定。",
+                  '紅鸞':"紅鸞星要說明",
+                  '天喜':"天喜星要說明",
+                  '天魁':"天魁星要說明",
+                  '天鉞':"天鉞星要說明",
+                  '天刑':"天刑星要說明",
+                  '天馬':"天馬星要說明",
+                  '地空':"地空星要說明",
+                  '地劫':"地劫星要說明",
+                  '三台':"三台星要說明",
+                  '八座':"八座星要說明"}
+    #父母宮
+    explain_star_12={'紫微':"",
+                  '天機':"",
+                  '太陽':"",
+                  '武曲':"",
+                  '天同':"",
+                  '廉貞':"",
+                  '天府':"",
+                  '太陰':"",
+                  '貪狼':"",
+                  '巨門':"",
+                  '天相':"",
+                  '天梁':"",
+                  '七殺':"",
+                  '破軍':"",
                   '文昌':"文昌星要說明",
                   '文曲':"文曲星要說明",
                   '左輔':"左輔星要說明",
@@ -91,7 +510,6 @@ def show_result(result_data,f_number):   #顯示宮位主星說明
                   '三台':"三台星要說明",
                   '八座':"八座星要說明"}
 
-    #print(result_data[1][f_number])
     show_item=[2,3,9,10,11,12,13,14,15,19,20,21,23,24,25]
     show_contant = []
 
@@ -107,30 +525,39 @@ def show_result(result_data,f_number):   #顯示宮位主星說明
 
     style = Style()
     style.theme_use("alt")
-    fontStyle = tkFont.Font(family="標楷體", size=20)#Keiu 16    
+    fontStyle = tkFont.Font(family="標楷體", size=20)#Keiu 16
+    text_sr= tk.Text(root_show_result,height=12)
+    text_sr.configure(font=fontStyle)
+    text_sr.pack(fill=BOTH,padx=5)#,expand=True,pady=10
+
     for i in show_item:
         if result_data[i][f_number] != '' :
-            show_temp = result_data[i][f_number]
+            show_temp = result_data[i][f_number]    #宮位名
             if (show_temp != '' ) and (show_temp != ['', ''] ):
                 show_contant.append(show_temp)
-    m=0
+    frd ={'命宮':explain_star_1,'兄弟宮':explain_star_2,
+          '夫妻宮':explain_star_3,'子女宮':explain_star_4,
+          '財帛宮':explain_star_5,'疾厄宮':explain_star_6,
+          '遷移宮':explain_star_7,'僕役宮':explain_star_8,
+          '官祿宮':explain_star_9,'田宅宮':explain_star_10,
+          '福德宮':explain_star_11,'父母宮':explain_star_12,}
+    frd_name = result_data[1][f_number]
     for k in (show_contant):
-
         if type(k) == type(show_item):
-            tk.Label(root_show_result,font=fontStyle, text=k[0],width = 8).place(x=0,y=m*30)
-            tk.Label(root_show_result,font=fontStyle, text=explain_star[k[0]],width = 20).place(x=100,y=m*30)
-            #print(explain_star[k[0]])
+            text_sr.insert(END,k[0] +"\n")
+            text_sr.insert(INSERT,frd[frd_name][k[0]] +"\n")
+            text_sr.insert(END,"\n")
+            if k[1] != '':
+                text_sr.insert(INSERT,frd[frd_name][k[1]] +"\n")
+                text_sr.insert(END,"\n")
         else:
-            tk.Label(root_show_result,font=fontStyle, text=k,width = 8).place(x=0,y=m*30)
-            tk.Label(root_show_result,font=fontStyle, text=explain_star[k],width = 20).place(x=100,y=m*30)
-            #print(explain_star[k])
-        m+=1            
-
+            text_sr.insert(END,k +"\n")
+            text_sr.insert(INSERT,frd[frd_name][k] +"\n")
+            text_sr.insert(END,"\n")
+            
     if show_contant == []:
-        tk.Label(root_show_result,font=fontStyle, text=k,width = 8).place(x=0,y=m*30)
-        tk.Label(root_show_result,font=fontStyle, text=explain_star[k],width = 20).place(x=100,y=m*30)
-        print(result_data[1][f_number],"無主星") 
-        m+=1
+        text_sr.insert(END,result_data[1][f_number]+"無主星" +"\n")  
+
     root_show_result.mainloop()
     return 0
 
@@ -722,6 +1149,8 @@ def fate_explain_base():
 def fateplat_new(fate_data):    #命盤排列
     p_status = 0
     fpbg ='#F0F0F0'#'lightgreen''#F0F0F0'
+    bmlibg = 'lightblue'#
+    smlifg = 'red'
     root = Tk()
     screenwidth = root.winfo_screenwidth()
     screenheight = root.winfo_screenheight()
@@ -745,7 +1174,7 @@ def fateplat_new(fate_data):    #命盤排列
     filemenu = Menu(menubar,tearoff=False, font=('Keiu', 14 ))
     menubar.add_cascade(label="檔案",menu=filemenu)
     #File功能表內建立功能表清單
-    filemenu.add_command(label="開啟舊檔",command=root.destroy)#,command=openfile
+    filemenu.add_command(label="開啟舊檔",command=root.destroy)#load_data()
     filemenu.add_command(label="儲存圖片",command=lambda:save_img(fate_data[16]))#lambda:save_img(fate_data[16])
     filemenu.add_separator()
     filemenu.add_command(label="離開程式",command=quit)
@@ -903,18 +1332,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm1, text=fate_data[19][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=0)    #地劫
     tk.Label(fm1, text=fate_data[20][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=25)    #地空
-    tk.Label(fm1, text=fate_data[21][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm1, text=fate_data[21][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm1, text=fate_data[23][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm1, text=fate_data[24][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=150,y=50)    #三台
-    tk.Label(fm1, text=fate_data[25][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=50)    #八座
+    tk.Label(fm1, text=fate_data[23][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm1, text=fate_data[24][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=150,y=25)    #三台
+    tk.Label(fm1, text=fate_data[25][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=150,y=50)    #八座
 
     tk.Label(fm1, text=fate_data[11][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=0)  #火星、鈴星
-    tk.Label(fm1, text=fate_data[15][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=30) #天魁、天鉞
-    tk.Label(fm1, text=fate_data[14][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=250,y=0) #陀羅、祿存、擎羊
+    tk.Label(fm1, text=fate_data[15][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=25) #天魁、天鉞
+    tk.Label(fm1, text=fate_data[14][0],font=fontStyle, width=4, height=1, bg = fpbg).place(x=200,y=50) #陀羅、祿存、擎羊
 
-    fm1_sm_li = tk.Label(fm1, text=fate_data[8][0],font=fontStyle, width=4, height=1).place(x=200,y=90)    #小限流年
-    fm1_bm_li = tk.Label(fm1, text=fate_data[7][5][0], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm1_sm_li = tk.Label(fm1, text=fate_data[8][0],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)    #小限流年
+    fm1_bm_li = tk.Label(fm1, text=fate_data[7][5][0], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm1_local_t = tk.Label(fm1, text=fate_data[17][0], width=4, height=1,bg='yellow').place(x=250,y=105)    #命盤宮位天干--寅首
     fm1_local = tk.Label(fm1, text='子', width=4, height=1,bg='yellow').place(x=250,y=130)  #命盤宮位地支--固定
     fm1_name = tk.Button(fm1, font=fontStyle, text=fate_data[1][0], width=6, height=1, command=lambda:show_result(fate_data,0)).place(x=120,y=120)   #命盤宮位名稱
@@ -936,18 +1365,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm2, text=fate_data[19][1],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm2, text=fate_data[20][1],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm2, text=fate_data[21][1],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm2, text=fate_data[21][1],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm2, text=fate_data[23][1],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm2, text=fate_data[24][1],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm2, text=fate_data[25][1],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm2, text=fate_data[23][1],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm2, text=fate_data[24][1],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm2, text=fate_data[25][1],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm2, text=fate_data[11][1],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm2, text=fate_data[15][1],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm2, text=fate_data[14][1],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm2, text=fate_data[14][1],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm2_sm_li = tk.Label(fm2, text=fate_data[8][1],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm2_bm_li = tk.Label(fm2, text=fate_data[7][5][1], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm2_sm_li = tk.Label(fm2, text=fate_data[8][1],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm2_bm_li = tk.Label(fm2, text=fate_data[7][5][1], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm2_local_t = tk.Label(fm2, text=fate_data[17][1], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm2_local = tk.Label(fm2, text='丑', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm2_result=[fate_data[1][1],fate_data[2][1],fate_data[3][1]]
@@ -970,18 +1399,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm3, text=fate_data[19][2],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm3, text=fate_data[20][2],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm3, text=fate_data[21][2],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm3, text=fate_data[21][2],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm3, text=fate_data[23][2],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm3, text=fate_data[24][2],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm3, text=fate_data[25][2],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm3, text=fate_data[23][2],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm3, text=fate_data[24][2],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm3, text=fate_data[25][2],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm3, text=fate_data[11][2],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm3, text=fate_data[15][2],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm3, text=fate_data[14][2],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm3, text=fate_data[14][2],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm3_sm_li = tk.Label(fm3, text=fate_data[8][2],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm3_bm_li = tk.Label(fm3, text=fate_data[7][5][2], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm3_sm_li = tk.Label(fm3, text=fate_data[8][2],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm3_bm_li = tk.Label(fm3, text=fate_data[7][5][2], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm3_local_t = tk.Label(fm3, text=fate_data[17][2], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm3_local = tk.Label(fm3, text='寅', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm3_result=[fate_data[1][2],fate_data[2][2],fate_data[3][2]]
@@ -1004,18 +1433,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm4, text=fate_data[19][3],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm4, text=fate_data[20][3],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm4, text=fate_data[21][3],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm4, text=fate_data[21][3],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm4, text=fate_data[23][3],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm4, text=fate_data[24][3],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm4, text=fate_data[25][3],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm4, text=fate_data[23][3],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm4, text=fate_data[24][3],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm4, text=fate_data[25][3],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm4, text=fate_data[11][3],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm4, text=fate_data[15][3],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm4, text=fate_data[14][3],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm4, text=fate_data[14][3],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm4_sm_li = tk.Label(fm4, text=fate_data[8][3],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm4_bm_li = tk.Label(fm4, text=fate_data[7][5][3], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm4_sm_li = tk.Label(fm4, text=fate_data[8][3],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm4_bm_li = tk.Label(fm4, text=fate_data[7][5][3], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm4_local_t = tk.Label(fm4, text=fate_data[17][3], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm4_local = tk.Label(fm4, text='卯', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm4_result=[fate_data[1][3],fate_data[2][3],fate_data[3][3]]
@@ -1038,18 +1467,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm5, text=fate_data[19][4],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm5, text=fate_data[20][4],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm5, text=fate_data[21][4],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm5, text=fate_data[21][4],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm5, text=fate_data[23][4],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm5, text=fate_data[24][4],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm5, text=fate_data[25][4],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm5, text=fate_data[23][4],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm5, text=fate_data[24][4],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm5, text=fate_data[25][4],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm5, text=fate_data[11][4],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm5, text=fate_data[15][4],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm5, text=fate_data[14][4],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm5, text=fate_data[14][4],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm5_sm_li = tk.Label(fm5, text=fate_data[8][4],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm5_bm_li = tk.Label(fm5, text=fate_data[7][5][4], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm5_sm_li = tk.Label(fm5, text=fate_data[8][4],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm5_bm_li = tk.Label(fm5, text=fate_data[7][5][4], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm5_local_t = tk.Label(fm5, text=fate_data[17][4], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm5_local = tk.Label(fm5, text='辰', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm5_result=[fate_data[1][4],fate_data[2][4],fate_data[3][4]]
@@ -1072,18 +1501,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm6, text=fate_data[19][5],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm6, text=fate_data[20][5],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm6, text=fate_data[21][5],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm6, text=fate_data[21][5],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm6, text=fate_data[23][5],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm6, text=fate_data[24][5],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm6, text=fate_data[25][5],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm6, text=fate_data[23][5],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm6, text=fate_data[24][5],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm6, text=fate_data[25][5],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm6, text=fate_data[11][5],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm6, text=fate_data[15][5],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm6, text=fate_data[14][5],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm6, text=fate_data[14][5],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm6_sm_li = tk.Label(fm6, text=fate_data[8][5],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm6_bm_li = tk.Label(fm6, text=fate_data[7][5][5], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm6_sm_li = tk.Label(fm6, text=fate_data[8][5],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm6_bm_li = tk.Label(fm6, text=fate_data[7][5][5], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm6_local_t = tk.Label(fm6, text=fate_data[17][5], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm6_local = tk.Label(fm6, text='巳', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm6_result=[fate_data[1][5],fate_data[2][5],fate_data[3][5]]
@@ -1106,18 +1535,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm7, text=fate_data[19][6],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm7, text=fate_data[20][6],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm7, text=fate_data[21][6],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm7, text=fate_data[21][6],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm7, text=fate_data[23][6],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm7, text=fate_data[24][6],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm7, text=fate_data[25][6],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm7, text=fate_data[23][6],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm7, text=fate_data[24][6],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm7, text=fate_data[25][6],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm7, text=fate_data[11][6],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm7, text=fate_data[15][6],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm7, text=fate_data[14][6],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm7, text=fate_data[14][6],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm7_sm_li = tk.Label(fm7, text=fate_data[8][6],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm7_bm_li = tk.Label(fm7, text=fate_data[7][5][6], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm7_sm_li = tk.Label(fm7, text=fate_data[8][6],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm7_bm_li = tk.Label(fm7, text=fate_data[7][5][6], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm7_local_t = tk.Label(fm7, text=fate_data[17][6], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm7_local = tk.Label(fm7, text='午', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm7_result=[fate_data[1][6],fate_data[2][6],fate_data[3][6]]
@@ -1140,18 +1569,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm8, text=fate_data[19][7],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm8, text=fate_data[20][7],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm8, text=fate_data[21][7],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm8, text=fate_data[21][7],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm8, text=fate_data[23][7],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm8, text=fate_data[24][7],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm8, text=fate_data[25][7],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm8, text=fate_data[23][7],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm8, text=fate_data[24][7],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm8, text=fate_data[25][7],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm8, text=fate_data[11][7],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm8, text=fate_data[15][7],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm8, text=fate_data[14][7],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm8, text=fate_data[14][7],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm8_sm_li = tk.Label(fm8, text=fate_data[8][7],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm8_bm_li = tk.Label(fm8, text=fate_data[7][5][7], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm8_sm_li = tk.Label(fm8, text=fate_data[8][7],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm8_bm_li = tk.Label(fm8, text=fate_data[7][5][7], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm8_local_t = tk.Label(fm8, text=fate_data[17][7], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm8_local = tk.Label(fm8, text='未', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm8_result=[fate_data[1][7],fate_data[2][7],fate_data[3][7]]
@@ -1174,18 +1603,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm9, text=fate_data[19][8],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm9, text=fate_data[20][8],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm9, text=fate_data[21][8],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm9, text=fate_data[21][8],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm9, text=fate_data[23][8],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm9, text=fate_data[24][8],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm9, text=fate_data[25][8],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm9, text=fate_data[23][8],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm9, text=fate_data[24][8],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm9, text=fate_data[25][8],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm9, text=fate_data[11][8],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm9, text=fate_data[15][8],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm9, text=fate_data[14][8],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm9, text=fate_data[14][8],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm9_sm_li = tk.Label(fm9, text=fate_data[8][8],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm9_bm_li = tk.Label(fm9, text=fate_data[7][5][8], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm9_sm_li = tk.Label(fm9, text=fate_data[8][8],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm9_bm_li = tk.Label(fm9, text=fate_data[7][5][8], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm9_local_t = tk.Label(fm9, text=fate_data[17][8], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm9_local = tk.Label(fm9, text='申', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm9_result=[fate_data[1][8],fate_data[2][8],fate_data[3][8]]
@@ -1208,18 +1637,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm10, text=fate_data[19][9],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm10, text=fate_data[20][9],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm10, text=fate_data[21][9],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm10, text=fate_data[21][9],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm10, text=fate_data[23][9],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm10, text=fate_data[24][9],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm10, text=fate_data[25][9],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm10, text=fate_data[23][9],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm10, text=fate_data[24][9],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm10, text=fate_data[25][9],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm10, text=fate_data[11][9],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm10, text=fate_data[15][9],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm10, text=fate_data[14][9],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm10, text=fate_data[14][9],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm10_sm_li = tk.Label(fm10, text=fate_data[8][9],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm10_bm_li = tk.Label(fm10, text=fate_data[7][5][9], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm10_sm_li = tk.Label(fm10, text=fate_data[8][9],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm10_bm_li = tk.Label(fm10, text=fate_data[7][5][9], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm10_local_t = tk.Label(fm10, text=fate_data[17][9], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm10_local = tk.Label(fm10, text='酉', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm10_result=[fate_data[1][9],fate_data[2][9],fate_data[3][9]]
@@ -1242,18 +1671,18 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm11, text=fate_data[19][10],font=fontStyle, width=4, height=1).place(x=100,y=0)   #地劫
     tk.Label(fm11, text=fate_data[20][10],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm11, text=fate_data[21][10],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm11, text=fate_data[21][10],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
 
-    tk.Label(fm11, text=fate_data[23][10],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm11, text=fate_data[24][10],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm11, text=fate_data[25][10],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
+    tk.Label(fm11, text=fate_data[23][10],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm11, text=fate_data[24][10],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm11, text=fate_data[25][10],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm11, text=fate_data[11][10],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm11, text=fate_data[15][10],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm11, text=fate_data[14][10],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm11, text=fate_data[14][10],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    fm11_sm_li = tk.Label(fm11, text=fate_data[8][10],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm11_bm_li = tk.Label(fm11, text=fate_data[7][5][10], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm11_sm_li = tk.Label(fm11, text=fate_data[8][10],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm11_bm_li = tk.Label(fm11, text=fate_data[7][5][10], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm11_local_t = tk.Label(fm11, text=fate_data[17][10], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm11_local = tk.Label(fm11, text='戌', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm11_result=[fate_data[1][10],fate_data[2][10],fate_data[3][10]]
@@ -1276,18 +1705,19 @@ def fateplat_new(fate_data):    #命盤排列
 
     tk.Label(fm12, text=fate_data[19][11],font=fontStyle, width=4, height=1).place(x=100,y=0)    #地劫
     tk.Label(fm12, text=fate_data[20][11],font=fontStyle, width=4, height=1).place(x=100,y=25)    #地空
-    tk.Label(fm12, text=fate_data[21][11],font=fontStyle, width=4, height=1).place(x=250,y=25)    #紅鸞、天喜
+    tk.Label(fm12, text=fate_data[21][11],font=fontStyle, width=4, height=1).place(x=100,y=50)    #紅鸞、天喜
+
+
+    tk.Label(fm12, text=fate_data[23][11],font=fontStyle, width=4, height=1).place(x=150,y=0)    #天刑、天馬
+    tk.Label(fm12, text=fate_data[24][11],font=fontStyle, width=4, height=1).place(x=150,y=25)    #三台
+    tk.Label(fm12, text=fate_data[25][11],font=fontStyle, width=4, height=1).place(x=150,y=50)    #八座
 
     tk.Label(fm12, text=fate_data[11][11],font=fontStyle, width=4, height=1).place(x=200,y=0)
     tk.Label(fm12, text=fate_data[15][11],font=fontStyle, width=4, height=1).place(x=200,y=25)
-    tk.Label(fm12, text=fate_data[14][11],font=fontStyle, width=4, height=1).place(x=250,y=0)
+    tk.Label(fm12, text=fate_data[14][11],font=fontStyle, width=4, height=1).place(x=200,y=50)
 
-    tk.Label(fm12, text=fate_data[23][11],font=fontStyle, width=4, height=1).place(x=100,y=50)    #天刑、天馬
-    tk.Label(fm12, text=fate_data[24][11],font=fontStyle, width=4, height=1).place(x=150,y=50)    #三台
-    tk.Label(fm12, text=fate_data[25][11],font=fontStyle, width=4, height=1).place(x=200,y=50)    #八座
-
-    fm12_sm_li = tk.Label(fm12, text=fate_data[8][11],font=fontStyle, width=4, height=1).place(x=200,y=90)
-    fm12_bm_li = tk.Label(fm12, text=fate_data[7][5][11], width=8, height=1,bg='lightgreen').place(x=120,y=90)    #大限流年
+    fm12_sm_li = tk.Label(fm12, text=fate_data[8][11],font=fontStyle, width=4, height=1, fg=smlifg).place(x=200,y=90)
+    fm12_bm_li = tk.Label(fm12, text=fate_data[7][5][11], width=8, height=1,bg=bmlibg).place(x=120,y=90)    #大限流年
     fm12_local_t = tk.Label(fm12, text=fate_data[17][11], width=4, height=1,bg='yellow').place(x=250,y=105)
     fm12_local = tk.Label(fm12, text='亥', width=4, height=1,bg='yellow').place(x=250,y=130)
     fm12_result=[fate_data[1][11],fate_data[2][11],fate_data[3][11]]
@@ -2404,7 +2834,7 @@ def l_month_date(fate_data,l_date_add): #流月流日排盤
     fate_data[17]#寅首
     #'''
     xx=clander_cc.changecc(datetime.datetime.now()+ datetime.timedelta(days=l_date_add))   #透過萬年曆將流月陽曆轉換後的生辰八字所有資料
-    #print(xx)
+    #print(xx[1])
     #年:xx[0],月-日:xx[1],日:xx[2],:xx[3]
     #*-----將現在時刻八字分離出來作為排盤所需資料-----*****************************
     f_year_a = xx[0][0] #現在年天干
@@ -2438,7 +2868,7 @@ def l_month_date(fate_data,l_date_add): #流月流日排盤
     f_month_tenkan =tenkan_b[((tenkan_a[f_year_a])*2+f_month)%10]#現在月天干
     f_momth_dichi = dichi_b[f_month]#現在月地支
     xx[2] #現在日干支
-
+    '''
     temp_time_a =(tenkan_a[xx[2][0]])%5
     temp_time_b =(1+dichi[f_time])%10
 
@@ -2453,7 +2883,7 @@ def l_month_date(fate_data,l_date_add): #流月流日排盤
     elif temp_time_a ==0:
         f_time_tenkan=tenkan_b[10 if ((8+temp_time_b)%10) == 0 else ((8+temp_time_b)%10)]#現在時天干
     f_time_dichi = f_time#現在時地支
-
+    '''
     #print(f_year_a,f_year_b,'年')
     #print(f_month_tenkan,f_momth_dichi,'月')
     #print(xx[2][0],xx[2][1],'日')
@@ -2487,7 +2917,7 @@ def l_month_date(fate_data,l_date_add): #流月流日排盤
     style = Style()
     style.theme_use("alt")
     l_fontStyle = tkFont.Font(family="標楷體", size=16)
-    tk.Label(root_Lmd, font=l_fontStyle,fg='red', text='流月流日農曆: '+f_year_a+f_year_b+' 年 '+f_month_tenkan+f_momth_dichi+' 月 '+xx[2][0]+xx[2][1]+' 日', width=30, height=1).place(x=300,y=180)
+    tk.Label(root_Lmd, font=l_fontStyle,fg='red', text='流月流日農曆: '+f_year_a+f_year_b+' 年 '+f_month_tenkan+f_momth_dichi+' 月 '+xx[2][0]+xx[2][1]+' 日 '+xx[1], width=35, height=1).place(x=300,y=180)
     tk.Label(root_Lmd, font=l_fontStyle,fg='blue', text='今天陽曆是:'+str(datetime.date.today()), width=30, height=1).place(x=300,y=220)
    
     drawtray = Canvas(root_Lmd,width=1200,height=652)   #設定三方四正畫布
