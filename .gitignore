@@ -2,3 +2,5 @@ __pycache__/
 fateenv/
 *.jpg
 *.txt
+*.rd
+test.py
